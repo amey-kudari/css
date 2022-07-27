@@ -15,21 +15,24 @@ body{
   font-size: large;
   font-family: 'Roboto', sans-serif;
   background-color: #eee;
-
+  padding: 0px;
+  margin: 0px;
 }
 
 #container{
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
+  margin-bottom: 0px;
 }
 
 #chatwindow{
   /* width: 100%; */
-  padding: 20px;
+  padding: 20px 20px 5px 20px;
   /* display: grid; */
   align-items: end;
   background: white;
   border-radius: 10px;
+  background-image: url('back3.jpg');
 }
 
 @media only screen and (max-width: 150ch) {
@@ -47,17 +50,18 @@ body{
     padding: 10px;
     /* display: grid; */
     align-items: end;
-    background: white;
   }
 
 }
 
 form {
+  margin-top: 15px;
   display: grid;
   grid-template-columns: 200fr 10fr 1fr;
   grid-gap: 0ch;
-  background: white;
-
+  /* background: white; */
+  /* position: absolute; */
+  /* bottom: 1px; */
 }
 
 #chatwindow input{
@@ -70,15 +74,22 @@ form {
 
 #chat{
   margin-top: 0px;
-  background-color: rgb(250, 250, 250);
+  /* background-color: rgb(250, 250, 250); */
   overflow-y: scroll;
-  max-height: 85vh;
+  max-height: 90vh;
   /* border: 1px solid #eee; */
   border-radius: 5px;
   position: relative;
+  box-sizing: content-box;
 }
 
-@media only screen and (max-height: 650px) {
+@media only screen and (max-height: 850px) {
+  #chat{
+    max-height: 85vh;
+  }
+}
+
+@media only screen and (max-height: 660px) {
   #chat{
     max-height: 80vh;
   }
@@ -115,6 +126,7 @@ form {
 
 .from-o p{
   background: rgb(250, 182, 216);
+  border-top-left-radius: 0px;
 }
 
 .chat-timestamp{
@@ -275,7 +287,8 @@ let messages = [
 const chat = dq('#chat');
 
 const remakechat = () => {
-  content = "";
+  let content = "";
+  // let closed = false;
   messages.forEach(message => {
     // <div></div><p>Today</p><div></div>
     if(message.from !== 'timestamp'){
@@ -287,7 +300,8 @@ const remakechat = () => {
       content = content + `
       <div class="message chat-timestamp">
         <div></div><p>Messages above were sent >${Math.round((new Date() - (new Date(message.timestamp)))/1000)} seconds ago</p><div></div>
-      </div>`;
+      </div>
+      `;
     }
   });
   chat.innerHTML=content;
@@ -322,20 +336,21 @@ dq('#newtext').addEventListener('keyup', e=>{
 dq('form').addEventListener('submit', e=>{
   e.preventDefault();
   console.log("SUBMIT!!");
-  let message = dq('#newtext').value;
-  let from = dq('#input-confidencial').checked ? 'cheese' : 'cherry';
+  const message = dq('#newtext').value;
+  const from = dq('#input-confidencial').checked ? 'cheese' : 'cherry';
   console.log(message, from);
   let ttimestamp = (new Date()).toString();
-  messages.push({message, from, timestamp: ttimestamp});
-  dq('#newtext').value = '';
-  remakechat();
-  chat.scroll(0,1000000000000);
+  if(message.length > 0){
+    messages.push({message, from, timestamp: ttimestamp});
+    dq('#newtext').value = '';
+    remakechat();
+    chat.scroll(0,1000000000000);
+  }
 })
 
 setInterval( () => {
   if(messages[messages.length - 1].from !=='timestamp'){
     messages.push({
-      message: 'Lorem ipsum dolor sit amet',
       from: 'timestamp',
       timestamp: (new Date()).toString()
     });
@@ -344,6 +359,10 @@ setInterval( () => {
 }, 20*1000);
 
 setInterval(() => {remakechat()}, 1000);
+
+document.addEventListener('keydown', e=>{
+  dq('#newtext').focus();
+});
 
 </script>
 </body>

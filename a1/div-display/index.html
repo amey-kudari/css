@@ -117,7 +117,6 @@ function inWords(num) {
 }
 
 dq("input")?.addEventListener("change", (e) => {
-  console.log(parseInt(e.target.value));
   if (parseInt(e.target.value) > 0) {
     let divs = "";
     for (let i = 0; i < parseInt(e.target.value); i++) {
@@ -125,7 +124,6 @@ dq("input")?.addEventListener("change", (e) => {
         i + 1
       )?.toUpperCase()}</div> \n`;
     }
-    console.log(divs);
     dq("#app").innerHTML = divs;
   }
 });
