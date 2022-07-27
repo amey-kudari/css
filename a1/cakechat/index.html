@@ -79,6 +79,15 @@ form {
   /* width: 100%; */
 }
 
+.spacer{
+  height: 0vh;
+}
+
+.form-container{
+  height: calc(10vh - 25px);
+  overflow-y: hidden;
+}
+
 #chat{
   margin-top: 0px;
   /* background-color: rgb(250, 250, 250); */
@@ -94,17 +103,30 @@ form {
   #chat{
     height: 85vh;
   }
+  .form-container{
+    height: calc(15vh - 25px);
+    overflow-y: hidden;
+  }
+
 }
 
 @media only screen and (max-height: 660px) {
   #chat{
     height: 85vh;
   }
+  .form-container{
+    height: calc(15vh - 25px);
+    overflow-y: hidden;
+  }
 }
 
 @media only screen and (max-height: 550px) {
   #chat{
     height: 80vh;
+  }
+  .form-container{
+    height: calc(20vh - 25px);
+    overflow-y: hidden;
   }
 }
 
@@ -226,14 +248,7 @@ em{
   float: right;
 }
 
-.form-container{
-  max-height: 9vh;
-  overflow-y: hidden;
-}
 
-.spacer{
-  height: 10vh;
-}
 
 </style>
 <body>
@@ -243,16 +258,17 @@ em{
   <div id="chat">
   </div>
   <div class="form-container">
-  <form>
-    <input id="newtext"></input>
-    <button type="submit" id="sub">
-      <i class="fa fa-paper-plane" aria-hidden="true"></i>
-    </button>
-    <div class="checkbox">
-      <input type="checkbox" class="input-assumpte" id="input-confidencial" />
-      <label for="input-confidencial"></label>
-    </div>
-  </form>
+    <div class="spacer"></div>
+    <form>
+      <input id="newtext"></input>
+      <button type="submit" id="sub">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+      </button>
+      <div class="checkbox">
+        <input type="checkbox" class="input-assumpte" id="input-confidencial" />
+        <label for="input-confidencial"></label>
+      </div>
+    </form>
   </div>
 </div>
 <div class="sides"></div>
