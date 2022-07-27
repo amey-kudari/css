@@ -291,11 +291,11 @@ const remakechat = () => {
     }
   });
   chat.innerHTML=content;
-  chat.scroll(0,1000000000000);
   console.log(content);
 }
 
 remakechat();
+chat.scroll(0,1000000000000);
 
 dq('#input-confidencial').addEventListener('change', e=>{
   if(dq('#input-confidencial').checked){
@@ -329,6 +329,7 @@ dq('form').addEventListener('submit', e=>{
   messages.push({message, from, timestamp: ttimestamp});
   dq('#newtext').value = '';
   remakechat();
+  chat.scroll(0,1000000000000);
 })
 
 setInterval( () => {
