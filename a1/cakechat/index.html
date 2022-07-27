@@ -51,14 +51,18 @@ body{
     /* display: grid; */
     align-items: end;
   }
+  body{
+    font-size: medium;
+  }
 
 }
 
 form {
-  margin-top: 15px;
   display: grid;
   grid-template-columns: 200fr 10fr 1fr;
   grid-gap: 0ch;
+  margin-top: 1vh;
+  max-height:9vh;
   /* background: white; */
   /* position: absolute; */
   /* bottom: 1px; */
@@ -76,28 +80,28 @@ form {
   margin-top: 0px;
   /* background-color: rgb(250, 250, 250); */
   overflow-y: scroll;
-  max-height: 90vh;
+  height: 90vh;
   /* border: 1px solid #eee; */
   border-radius: 5px;
   position: relative;
   box-sizing: content-box;
 }
 
-@media only screen and (max-height: 850px) {
+/* @media only screen and (max-height: 850px) {
   #chat{
-    max-height: 85vh;
+    height: 85vh;
   }
-}
+} */
 
 @media only screen and (max-height: 660px) {
   #chat{
-    max-height: 80vh;
+    height: 85vh;
   }
 }
 
 @media only screen and (max-height: 550px) {
   #chat{
-    max-height: 75vh;
+    height: 80vh;
   }
 }
 
