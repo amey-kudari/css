@@ -33,6 +33,8 @@ body{
   background: white;
   border-radius: 10px;
   background-image: url('back3.jpg');
+  display: grid;
+  /* overflow-y: hidden; */
 }
 
 @media only screen and (max-width: 150ch) {
@@ -43,13 +45,14 @@ body{
 
 @media only screen and (max-width: 100ch) {
   #container{
-    grid-template-columns: 1fr 100fr 1fr;
+    grid-template-columns: 1fr 1000fr 1fr;
   }
   #chatwindow{
     /* width: 100%; */
     padding: 10px;
     /* display: grid; */
     align-items: end;
+    border-radius: 0px;
   }
   body{
     font-size: medium;
@@ -87,11 +90,11 @@ form {
   box-sizing: content-box;
 }
 
-/* @media only screen and (max-height: 850px) {
+@media only screen and (max-height: 770px) {
   #chat{
     height: 85vh;
   }
-} */
+}
 
 @media only screen and (max-height: 660px) {
   #chat{
@@ -223,6 +226,15 @@ em{
   float: right;
 }
 
+.form-container{
+  max-height: 9vh;
+  overflow-y: hidden;
+}
+
+.spacer{
+  height: 10vh;
+}
+
 </style>
 <body>
 <div id="container">
@@ -230,6 +242,7 @@ em{
 <div id="chatwindow">
   <div id="chat">
   </div>
+  <div class="form-container">
   <form>
     <input id="newtext"></input>
     <button type="submit" id="sub">
@@ -240,7 +253,7 @@ em{
       <label for="input-confidencial"></label>
     </div>
   </form>
-
+  </div>
 </div>
 <div class="sides"></div>
 </div>
