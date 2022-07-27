@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CakeChat!</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+
+</head>
+<style>
+body{
+  font-size: large;
+  font-family: 'Roboto', sans-serif;
+  background-color: #eee;
+
+}
+
+#container{
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+}
+
+#chatwindow{
+  /* width: 100%; */
+  padding: 20px;
+  /* display: grid; */
+  align-items: end;
+  background: white;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 150ch) {
+  #container{
+    grid-template-columns: 1fr 20fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 100ch) {
+  #container{
+    grid-template-columns: 1fr 100fr 1fr;
+  }
+  #chatwindow{
+    /* width: 100%; */
+    padding: 10px;
+    /* display: grid; */
+    align-items: end;
+    background: white;
+  }
+
+}
+
+form {
+  display: grid;
+  grid-template-columns: 200fr 10fr 1fr;
+  grid-gap: 0ch;
+  background: white;
+
+}
+
+#chatwindow input{
+  padding: 10px;
+  font-size: large;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  /* width: 100%; */
+}
+
+#chat{
+  margin-top: 20px;
+  background-color: rgb(250, 250, 250);
+  overflow-y: scroll;
+  max-height: 85vh;
+  /* border: 1px solid #eee; */
+  border-radius: 5px;
+  position: relative;
+}
+
+@media only screen and (max-height: 650px) {
+  #chat{
+    max-height: 80vh;
+  }
+}
+
+@media only screen and (max-height: 550px) {
+  #chat{
+    max-height: 75vh;
+  }
+}
+
+.message{
+  width: 100%;
+  word-wrap: break-word;
+  display:flex;
+}
+
+.message p{
+  padding: 15px;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.from-me{
+  text-align: right;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.from-me p{
+  background: #91eafa;
+}
+
+.from-o p{
+  background: rgb(250, 182, 216);
+}
+
+.chat-timestamp{
+  display: grid;
+  grid-template-columns: 100fr 1fr 100fr;
+  position: sticky;
+  top: 1px;
+}
+
+.chat-timestamp p{
+  width: max-content;
+  align-self: center;
+  background-color: #eee;
+  padding: 10px 20px;
+
+}
+
+input[type='checkbox']{
+  padding: 0px;
+}
+
+input:checked{
+  padding: 0px;
+  background-color: rgb(250, 182, 216);
+}
+
+.checkbox .tag {
+  color: #22dcfd;
+  display: block;
+  float: right;
+  font-weight: bold;
+  position: relative;
+}
+.checkbox .input-assumpte {
+  display: none;
+}
+.input-assumpte + label:after {
+  background-color: #22dcfd;
+  border: 1px solid #cacece;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  display: block;
+  transition-duration: 0.1s;
+  width: 16px;
+  height: 16px;
+  content: '';
+  margin-left: 10px;
+}
+.input-assumpte:checked + label:after {
+  background-color: rgb(250, 182, 216);
+}
+
+#sub{
+  background-color: #22dcfd;
+  border: 0px solid black;
+  border-radius: 10%;
+  cursor: pointer;
+  min-width: 8ch;
+}
+
+small{
+  display: block;
+  margin-top: 5px;
+  color: rgb(105, 105, 105);
+}
+
+.from-me p .message-timestamp{
+  display: flex;
+  flex-direction: column-reverse;
+  /* float: right */
+}
+
+</style>
+<body>
+<div id="container">
+<div class="sides"> </div>
+<div id="chatwindow">
+  <form>
+    <input id="newtext"></input>
+    <button type="submit" id="sub">
+      <i class="fa fa-paper-plane" aria-hidden="true"></i>
+    </button>
+    <div class="checkbox">
+      <input type="checkbox" class="input-assumpte" id="input-confidencial" />
+      <label for="input-confidencial"></label>
+    </div>
+
+  </form>
+  <div id="chat">
+    <div class="message from-me"><p>Message 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium fuga rem alias.</p></div>
+    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message chat-timestamp"><div></div><p>Today</p><div></div></div>
+    <div class="message from-me"><p>Message 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium fuga rem alias.</p></div>
+    <!-- <div class="message from-me"><p>Message 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium fuga rem alias.</p></div> -->
+    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-me"><p>Message 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium fuga rem alias.</p></div>
+    <div class="message chat-timestamp"><div></div><p>Yesterday</p><div></div></div>
+    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message chat-timestamp"><div></div><p>Day before</p><div></div></div>
+    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
+  </div>
+</div>
+<div class="sides"></div>
+</div>
+<script>
+const dq = a => document.querySelector(a);
+
+let messages = [
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'qwe rqwer qwerqwer qwerqwerqwe qwer', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'timestamp', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+];
+
+const chat = dq('#chat');
+
+const remakechat = () => {
+  content = "";
+  messages.forEach(message => {
+    // <div></div><p>Today</p><div></div>
+    if(message.from !== 'timestamp'){
+      content = content + `
+      <div class="message ${message.from === 'cherry' ? "from-me" : (message.from === 'cheese' ? "from-o" : "chat-timestamp")}">
+        <p>${message.message} <small class="message-timestamp">${(new Date(message.timestamp)).toTimeString()}</small></p>
+      </div>`;
+    } else {
+      content = content + `
+      <div class="message chat-timestamp">
+        <div></div><p>${(new Date(message.timestamp)).toTimeString()}</p><div></div>
+      </div>`;
+    }
+  });
+  chat.innerHTML=content;
+  console.log(content);
+}
+
+remakechat();
+
+dq('#input-confidencial').addEventListener('change', e=>{
+  if(dq('#input-confidencial').checked){
+    dq('#sub').style.backgroundColor = 'rgb(250, 182, 216)';
+  } else {
+    dq('#sub').style.backgroundColor = '#22dcfd';
+  }
+})
+
+dq('#newtext').addEventListener('keyup', e=>{
+  if(e.key == '`'){
+    console.log(e);
+    if(dq('#input-confidencial').checked){
+      dq('#sub').style.backgroundColor = '#22dcfd';
+      dq('#input-confidencial').checked = false;
+    } else {
+      dq('#sub').style.backgroundColor = 'rgb(250, 182, 216)';
+      dq('#input-confidencial').checked = true;
+    }
+    dq('#newtext').value = '';
+  }
+})
+
+dq('form').addEventListener('submit', e=>{
+  e.preventDefault();
+  console.log("SUBMIT!!");
+  let message = dq('#newtext').value;
+  let from = dq('#input-confidencial').checked ? 'cheese' : 'cherry';
+  console.log(message, from);
+  let ttimestamp = (new Date()).toString();
+  messages.unshift({message, from, timestamp: ttimestamp});
+  dq('#newtext').value = '';
+  remakechat();
+})
+
+setInterval( () => {
+  if(messages[0].from !=='timestamp'){
+    messages.unshift({
+      message: 'Lorem ipsum dolor sit amet',
+      from: 'timestamp',
+      timestamp: (new Date()).toString()
+    });
+    remakechat();
+  };
+}, 20*1000);
+
+
+</script>
+</body>
+</html>
