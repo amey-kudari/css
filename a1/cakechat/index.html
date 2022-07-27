@@ -69,7 +69,7 @@ form {
 }
 
 #chat{
-  margin-top: 20px;
+  margin-top: 0px;
   background-color: rgb(250, 250, 250);
   overflow-y: scroll;
   max-height: 85vh;
@@ -97,9 +97,9 @@ form {
 }
 
 .message p{
-  padding: 15px;
+  padding: 10px 15px;
   border-radius: 15px;
-  margin: 10px;
+  margin: 2px;
 }
 
 .from-me{
@@ -110,6 +110,7 @@ form {
 
 .from-me p{
   background: #91eafa;
+  border-end-end-radius: 0px;
 }
 
 .from-o p{
@@ -180,9 +181,30 @@ small{
 }
 
 .from-me p .message-timestamp{
-  display: flex;
-  flex-direction: column-reverse;
+  /* display: flex; */
+  /* flex-direction: column-reverse; */
+  text-align: right;
   /* float: right */
+}
+
+.message-timestamp{
+  font-size: small;
+  text-align: right;
+}
+
+.m-head{
+  display: block;
+  margin-bottom: 5px;
+}
+
+strong{
+  color: rgb(2, 69, 194);
+}
+
+em{
+  color:rgb(105, 105, 105);
+  font-size: medium;
+  float: right;
 }
 
 </style>
@@ -190,6 +212,8 @@ small{
 <div id="container">
 <div class="sides"> </div>
 <div id="chatwindow">
+  <div id="chat">
+  </div>
   <form>
     <input id="newtext"></input>
     <button type="submit" id="sub">
@@ -199,42 +223,8 @@ small{
       <input type="checkbox" class="input-assumpte" id="input-confidencial" />
       <label for="input-confidencial"></label>
     </div>
-
   </form>
-  <div id="chat">
-    <div class="message from-me"><p>Message 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium fuga rem alias.</p></div>
-    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message chat-timestamp"><div></div><p>Today</p><div></div></div>
-    <div class="message from-me"><p>Message 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium fuga rem alias.</p></div>
-    <!-- <div class="message from-me"><p>Message 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium fuga rem alias.</p></div> -->
-    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-me"><p>Message 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium fuga rem alias.</p></div>
-    <div class="message chat-timestamp"><div></div><p>Yesterday</p><div></div></div>
-    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message chat-timestamp"><div></div><p>Day before</p><div></div></div>
-    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem odio provident!</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-o"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-    <div class="message from-me"><p>Lorem ipsum dolor sit amet</p></div>
-  </div>
+
 </div>
 <div class="sides"></div>
 </div>
@@ -255,6 +245,7 @@ let messages = [
   {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'timestamp', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
@@ -265,6 +256,7 @@ let messages = [
   {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
+  {message: 'Lorem ipsum dolor sit amet', from: 'timestamp', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cherry', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
   {message: 'Lorem ipsum dolor sit amet', from: 'cheese', timestamp: 'Wed, 27 Jul 2022 08:53:33 GMT'},
@@ -289,16 +281,17 @@ const remakechat = () => {
     if(message.from !== 'timestamp'){
       content = content + `
       <div class="message ${message.from === 'cherry' ? "from-me" : (message.from === 'cheese' ? "from-o" : "chat-timestamp")}">
-        <p>${message.message} <small class="message-timestamp">${(new Date(message.timestamp)).toTimeString()}</small></p>
+        <p>${message.from !== 'cherry' ? '<span class="m-head"><strong class="number">9122212231</strong> <em>~cherry</em></span>' : ''}${message.message} <small class="message-timestamp">${(new Date(message.timestamp)).toTimeString().split('GMT')[0]}</small></p>
       </div>`;
     } else {
       content = content + `
       <div class="message chat-timestamp">
-        <div></div><p>${(new Date(message.timestamp)).toTimeString()}</p><div></div>
+        <div></div><p>Messages above were sent >${Math.round((new Date() - (new Date(message.timestamp)))/1000)} seconds ago</p><div></div>
       </div>`;
     }
   });
   chat.innerHTML=content;
+  chat.scroll(0,1000000000000);
   console.log(content);
 }
 
@@ -333,14 +326,14 @@ dq('form').addEventListener('submit', e=>{
   let from = dq('#input-confidencial').checked ? 'cheese' : 'cherry';
   console.log(message, from);
   let ttimestamp = (new Date()).toString();
-  messages.unshift({message, from, timestamp: ttimestamp});
+  messages.push({message, from, timestamp: ttimestamp});
   dq('#newtext').value = '';
   remakechat();
 })
 
 setInterval( () => {
-  if(messages[0].from !=='timestamp'){
-    messages.unshift({
+  if(messages[messages.length - 1].from !=='timestamp'){
+    messages.push({
       message: 'Lorem ipsum dolor sit amet',
       from: 'timestamp',
       timestamp: (new Date()).toString()
@@ -349,6 +342,7 @@ setInterval( () => {
   };
 }, 20*1000);
 
+setInterval(() => {remakechat()}, 1000);
 
 </script>
 </body>
