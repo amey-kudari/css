@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS A2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/fontawesome.min.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="content-sidebar.css">
+  <link rel="stylesheet" href="main-container.css">
+  <link rel="stylesheet" href="chat.css">
+  <link rel="stylesheet" href="side-pane.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+html, body, #container, #outer-sidebar{
+  height: 100%;
+  margin: 0px;
+  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+
+}
+
+#container{
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #bbb;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #999; 
+}
+
+.image-icon{
+  width: 1.5ch;
+  height: 1.5ch;
+  padding: 0px;
+  opacity: 0.7;
+  margin: 0px 5px;
+}
+
+.image-icon-big{
+  width: 2ch;
+  height: 2ch;
+  padding: 0px;
+  opacity: 1;
+  margin: 0px 5px;
+}
+
+.image-icon-lil-big{
+  width: 3.5ch;
+  height: 3.5ch;
+  padding: 0px;
+  margin: 0px 5px;
+}
+
+.image-icon-v-big{
+  width: 4ch;
+  height: 4ch;
+  padding: 0px;
+  opacity: 1;
+  /* margin: 0px 5px; */
+}
+
+.image-icon-vv-big{
+  width: 4.5ch;
+  height: 4.5ch;
+  padding: 0px;
+  opacity: 1;
+  border-radius: 2.25ch;
+  margin-right: 2ch;
+}
+
+.br-0{ border-radius: 0px;}
+
+@media only screen and (max-width: 1200px) {
+  #main-container{
+    grid-template-columns: 1fr 1fr;
+    width: max-content;
+    overflow-x: auto;
+    /* grid-template-rows: 1fr 1fr; */
+    /* overflow-y: scroll; */
+  }
+  #chat-window{
+    width: calc(100vw - 10ch);
+  }
+}
+
+@media only screen and (max-width: 755px) {
+  #main-container{
+    grid-template-columns: 1fr 1fr;
+    width: max-content;
+    overflow-x: auto;
+    /* grid-template-rows: 1fr 1fr; */
+    /* overflow-y: scroll; */
+  }
+  #chat-window{
+    width: calc(100vw - 10ch);
+  }
+}
+
+</style>
+<body>
+<div id="container">
+  <div id="outer-sidebar">
+    <!-- <i class="home-icon"></i> -->
+    <button class="outer-buttons netflix-logo">
+      <img src="/icons/netflix.png" alt="">
+    </button>
+    <button class="outer-buttons">
+      <img src="/icons/home.png" alt="" class="invert-image">
+    </button>
+    <button class="outer-buttons outer-active">
+      <img src="/icons/ticket.png" alt="" style="width:3.5ch; padding: 2.5ch 3ch;">
+    </button>
+    <button class="outer-buttons">
+      <img src="/icons/contact.png" alt="" class="invert-image">
+    </button>
+    <button class="outer-buttons">
+      <img src="/icons/portfolio.png" alt="" class="invert-image">
+    </button>
+    <button class="outer-buttons">
+      <img src="/icons/comment.png" alt="" class="invert-image">
+    </button>
+
+    <div id="outer-sidebar-footer">
+      <button class="outer-buttons">
+        <img src="/icons/dp.jpg" alt="" class="dp">
+      </button>
+      <button class="outer-buttons">
+        <img src="/icons/settings.png" alt="" class="invert-image">
+      </button>
+      <button class="outer-buttons">
+        <img src="/icons/bell.png" alt="" class="invert-image">
+      </button>
+    </div>
+  </div>
+  <button id="open-inner-sidebar" onclick="togglesidebar()"> &gt; </button>
+  <div id="sidebar-container">
+    <aside id="content-sidebar">
+      <header id="sidebar-header">
+        <h2 id="sidebar-head-text">Assigned to me (8) </h2>
+        <div id="head-button-group">
+          <button class="sidebar-head-buttons">
+            <img src="/icons/redo.png" alt="" class="header-button">
+          </button>
+          <!-- <button class="sidebar-head-buttons-circle">
+            <img src="/icons/back.png" atl="" class="header-button header-button-circle"></img>
+          </button> -->
+        </div>
+      </header>
+      <div id="sidebar-content">
+        <form id="sidebar-search">
+          <input type="text" id="sidebar-search-input" placeholder="&#9788; &nbsp; Search Tickets">
+        </form>
+
+        <div class="sidebar-card-container">
+          <div class="sidebar-card">
+            <small>#1231222</small>
+            <div class="sidebar-indicator">
+              <div class="sidebar-indicator-dot"></div>
+            </div>
+            <div class="number">
+              <h4><img src="/icons/sdp5.jpeg" alt="" class="image-icon-v-big"> <span class="number-value">+91 9223112321 </span></h4>
+            </div>
+            <footer class="sidebar-card-footer">
+              <p><img src="/icons/contact-book.png" alt="" class="image-icon-big"> July 25, 2022</p>
+              <p><img src="/icons/back-arrow.png" alt="" class="image-icon">  164h 40m</p>
+            </footer>
+          </div>
+        </div>
+
+        <div class="sidebar-card-container">
+          <div class="sidebar-card">
+            <small>#1231222</small>
+            <div class="sidebar-indicator">
+              <div class="sidebar-indicator-dot"></div>
+            </div>
+            <div class="number">
+              <h4><img src="/icons/sdp4.jpeg" alt="" class="image-icon-v-big"> <span class="number-value">+91 9223112321 </span></h4>
+            </div>
+            <footer class="sidebar-card-footer">
+              <p><img src="/icons/contact-book.png" alt="" class="image-icon-big"> July 25, 2022</p>
+              <p><img src="/icons/back-arrow.png" alt="" class="image-icon">  164h 40m</p>
+            </footer>
+          </div>
+        </div>
+
+        <div class="sidebar-card-container">
+          <div class="sidebar-card">
+            <small>#1231222</small>
+            <div class="sidebar-indicator">
+              <div class="sidebar-indicator-dot"></div>
+            </div>
+            <div class="number">
+              <h4><img src="/icons/sdp3.jpeg" alt="" class="image-icon-v-big"> <span class="number-value">+91 9223112321 </span></h4>
+            </div>
+            <footer class="sidebar-card-footer">
+              <p><img src="/icons/contact-book.png" alt="" class="image-icon-big"> July 25, 2022</p>
+              <p><img src="/icons/back-arrow.png" alt="" class="image-icon">  164h 40m</p>
+            </footer>
+          </div>
+        </div>
+
+        <div class="sidebar-card-container">
+          <div class="sidebar-card">
+            <small>#1231222</small>
+            <div class="sidebar-indicator">
+              <div class="sidebar-indicator-dot"></div>
+            </div>
+            <div class="number">
+              <h4><img src="/icons/sdp2.jpeg" alt="" class="image-icon-v-big"> <span class="number-value">+91 9223112321 </span></h4>
+            </div>
+            <footer class="sidebar-card-footer">
+              <p><img src="/icons/contact-book.png" alt="" class="image-icon-big"> July 25, 2022</p>
+              <p><img src="/icons/back-arrow.png" alt="" class="image-icon">  164h 40m</p>
+            </footer>
+          </div>
+        </div>
+
+        <div class="sidebar-card-container">
+          <div class="sidebar-card">
+            <small>#1231222</small>
+            <div class="sidebar-indicator">
+              <div class="sidebar-indicator-dot"></div>
+            </div>
+            <div class="number">
+              <h4><img src="/icons/sdp1.jpeg" alt="" class="image-icon-v-big"> <span class="number-value">+91 9223112321 </span></h4>
+            </div>
+            <footer class="sidebar-card-footer">
+              <p><img src="/icons/contact-book.png" alt="" class="image-icon-big"> July 25, 2022</p>
+              <p><img src="/icons/back-arrow.png" alt="" class="image-icon">  164h 40m</p>
+            </footer>
+          </div>
+        </div>
+
+        <div class="sidebar-card-container">
+          <div class="sidebar-card">
+            <small>#1231222</small>
+            <div class="sidebar-indicator">
+              <div class="sidebar-indicator-dot"></div>
+            </div>
+            <div class="number">
+              <h4><img src="/icons/sdp5.jpeg" alt="" class="image-icon-v-big"> <span class="number-value">+91 9223112321 </span></h4>
+            </div>
+            <footer class="sidebar-card-footer">
+              <p><img src="/icons/contact-book.png" alt="" class="image-icon-big"> July 25, 2022</p>
+              <p><img src="/icons/back-arrow.png" alt="" class="image-icon">  164h 40m</p>
+            </footer>
+          </div>
+        </div>
+
+        <div class="sidebar-card-container">
+          <div class="sidebar-card">
+            <small>#1231222</small>
+            <div class="sidebar-indicator">
+              <div class="sidebar-indicator-dot"></div>
+            </div>
+            <div class="number">
+              <h4><img src="/icons/sdp4.jpeg" alt="" class="image-icon-v-big"> <span class="number-value">+91 9223112321 </span></h4>
+            </div>
+            <footer class="sidebar-card-footer">
+              <p><img src="/icons/contact-book.png" alt="" class="image-icon-big"> July 25, 2022</p>
+              <p><img src="/icons/back-arrow.png" alt="" class="image-icon">  164h 40m</p>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+  </div>
+  <div id="main-container">
+    <div id="chat-window">
+      <header id="chat-header">
+        <h2 class="chat-head-one"><span style="font-weight:500;">Case</span> #1231222 <span class="yellow-tag">OPEN</span></h2>
+        <div id="chat-person-details">
+          <img src="/icons/sdp10.jpeg" alt="" class="image-icon-vv-big">
+          <h3>Doctor Strange</h3>
+        </div>
+      </header>
+      <header id="chat-header-1">
+        <div id="chat-header-1-number">
+          <img src="/icons/sdp5.jpeg" alt="" class="image-icon-vv-big br-0">
+          <h4>+91 9124590732</h4>
+        </div>
+        <div id="chat-header-1-refresh">
+          <button class="sidebar-head-buttons">
+            <img src="/icons/redo.png" alt="" class="header-button">
+          </button>
+        </div>
+        <div></div>
+      </header>
+      <div id="chatbox">
+        <!-- <div class="from-them">
+          <div class="message-from-them">
+            ASDF
+          </div>
+        </div> -->
+        <div class="from-them">
+          <div class="message-from-them">
+            <div class="chat-message-content chat-message-content-them">
+              <div class="calling-icon">
+                <img src="/icons/joined-call.png" alt="" class="image-calling-icon">
+              </div>
+              <div>
+                <h5 class="chat-main-message">Calling...</h5>
+                <small style="margin: 0ch 1ch 0ch 2ch;">+91 9100838027</small>
+              </div>
+            </div>
+            <div class="chat-icon-image-container"><img src="/icons/sdp5.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <small style="text-align:right; color:gray">&#128274;call &#9679; 6d</small><div></div>
+          </div>
+        </div>
+
+        <div>
+        <div class="from-server">
+          <div class="server-message">
+            Sunday, July 24th
+          </div>
+        </div>
+
+        <div class="from-them">
+          <div class="message-from-them">
+            <div class="chat-message-content chat-message-content-them">
+              <img src="/icons/joined-call.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">Joined Call</h5>
+            </div>
+            <div class="chat-icon-image-container"><img src="/icons/sdp5.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <small style="text-align:right; color:gray">&#128274;call &#9679; Tony Stark &#9679; 6d</small><div></div>
+          </div>
+        </div>
+
+        <div class="from-me">
+          <div class="message-from-me">
+            <div class="chat-icon-image-container"><img src="/icons/sdp4.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <div class="chat-message-content">
+              <img src="/icons/joined-call.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">Joined Call</h5>
+            </div>
+            <div></div><small style="text-align:left; color:gray">&#128274;call &#9679; 6d</small>
+          </div>
+        </div>
+
+        <div class="from-them">
+          <div class="message-from-them">
+            <div class="chat-message-content chat-message-content-them">
+              <img src="/icons/call-hold.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">+91 9821235712 Currently On-Hold</h5>
+            </div>
+            <div class="chat-icon-image-container"><img src="/icons/sdp5.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <small style="text-align:right; color:gray">&#128274;call &#9679; Tony Stark &#9679; 6d</small><div></div>
+          </div>
+        </div>
+      </div><div>
+
+        <div class="from-server">
+          <div class="server-message">
+            Case assigned to <strong>The Elder One</strong>
+          </div>
+        </div>
+
+        <div class="from-me">
+          <div class="message-from-me">
+            <div class="chat-icon-image-container"><img src="/icons/sdp4.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <div class="chat-message-content">
+              <img src="/icons/call-ended.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">Call Ended</h5>
+            </div>
+            <div></div><small style="text-align:left; color:gray">&#128274;call &#9679; 6d</small>
+          </div>
+        </div>
+
+        <div class="from-me">
+          <div class="message-from-me">
+            <div class="chat-icon-image-container"><img src="/icons/sdp4.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <div class="chat-message-content">
+              <img src="/icons/call-disconnected.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">Call Disconnected</h5>
+            </div>
+            <div></div><small style="text-align:left; color:gray">&#128274;call &#9679; 6d</small>
+          </div>
+        </div>
+
+        <div class="from-them">
+          <div class="message-from-them">
+            <div class="chat-message-content chat-message-content-them">
+              <div class="calling-icon">
+                <img src="/icons/joined-call.png" alt="" class="image-calling-icon">
+              </div>
+              <div>
+                <h5 class="chat-main-message">Calling...</h5>
+                <small style="margin: 0ch 1ch 0ch 2ch;">+91 9100838027</small>
+              </div>
+            </div>
+            <div class="chat-icon-image-container"><img src="/icons/sdp5.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <small style="text-align:right; color:gray">&#128274;call &#9679; 6d</small><div></div>
+          </div>
+        </div>
+
+        <div class="from-them">
+          <div class="message-from-them">
+            <div class="chat-message-content chat-message-content-them">
+              <img src="/icons/joined-call.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">Joined Call</h5>
+            </div>
+            <div class="chat-icon-image-container"><img src="/icons/sdp5.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <small style="text-align:right; color:gray">&#128274;call &#9679; Tony Stark &#9679; 6d</small><div></div>
+          </div>
+        </div></div>
+
+        <div>
+        <div class="from-server">
+          <div class="server-message">
+            Monday, July 25th
+          </div>
+        </div>
+
+        <div class="from-me">
+          <div class="message-from-me">
+            <div class="chat-icon-image-container"><img src="/icons/sdp4.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <div class="chat-message-content">
+              <img src="/icons/joined-call.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">Joined Call</h5>
+            </div>
+            <div></div><small style="text-align:left; color:gray">&#128274;call &#9679; 6d</small>
+          </div>
+        </div>
+
+        <div class="from-them">
+          <div class="message-from-them">
+            <div class="chat-message-content chat-message-content-them">
+              <img src="/icons/call-hold.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">+91 9821235712 Currently On-Hold</h5>
+            </div>
+            <div class="chat-icon-image-container"><img src="/icons/sdp5.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <small style="text-align:right; color:gray">&#128274;call &#9679; Tony Stark &#9679; 6d</small><div></div>
+          </div>
+        </div>
+
+        <div class="from-me">
+          <div class="message-from-me">
+            <div class="chat-icon-image-container"><img src="/icons/sdp4.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <div class="chat-message-content">
+              <img src="/icons/call-ended.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">Call Ended</h5>
+            </div>
+            <div></div><small style="text-align:left; color:gray">&#128274;call &#9679; 6d</small>
+          </div>
+        </div>
+
+        <div class="from-me">
+          <div class="message-from-me">
+            <div class="chat-icon-image-container"><img src="/icons/sdp4.jpeg" alt="" class="image-icon-lil-big chat-image-icon"></div>
+            <div class="chat-message-content">
+              <img src="/icons/call-disconnected.png" alt="" class="image-icon-v-big">
+              <h5 class="chat-main-message">Call Disconnected</h5>
+            </div>
+            <div></div><small style="text-align:left; color:gray">&#128274;call &#9679; 6d</small>
+          </div>
+        </div>
+      </div>
+
+      </div>
+      <div id="chat-input">
+        <input type="text" id="chat-input-box" placeholder="Type here...">
+      </div>
+    </div>
+    <div id="side-pane">
+      <header id="pane-header">
+        <h3 id="pane-heading">Contact Insights</h3>
+        <p>Insights to help you get a quick overview of the past relationship with the contact would appear here.</p>
+      </header>
+      <div id="pane-past-tickets">
+        <h3 id="pane-heading">Past Tickets (30)</h3>
+        <strong style="color:gray;font-weight: 599; font-size: 1.7ch;">TODAY, AUG 1, 2022</strong>
+        <div id="pane-ticket-container">
+
+          <div class="ticket">
+            <div class="ticket-sticker"></div>
+            <header class="ticket-header">
+              <h5 style="margin:0px;">Ticket #25382424</h5>
+              <button class="ticket-new-button">New</button>
+            </header>
+            <div class="ticket-content">
+              <div class="ticket-caller" style="display:flex">
+                <img src="/icons/sdp5.jpeg" alt="" class="image-icon-v-big">
+                <div class="ticket-caller-details">
+                  <strong style="font-size:1.5ch">+91 9249278215</strong><br/>
+                  <small style="font-size:1.5ch"><a href="#">+919249278215</a> <span style="color:gray">&#9679; Reply</span></small> 
+                </div>
+              </div>
+              <small style="justify-self:flex-end; color:gray">5d</small>
+              <div class="ticket-call">
+                <img src="/icons/call-ended.png" alt="" class="image-icon-vv-big" style="filter: grayscale(100%);">
+                <div style="font-size:1.5ch; align-items: center; margin-top: 5px;">
+                  <strong>Call Ended</strong> <br />
+                  <small style="color:gray">4 mins 26 secs</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket">
+            <div class="ticket-sticker"></div>
+            <header class="ticket-header">
+              <h5 style="margin:0px;">Ticket #25382424</h5>
+              <button class="ticket-new-button">New</button>
+            </header>
+            <div class="ticket-content">
+              <div class="ticket-caller" style="display:flex">
+                <img src="/icons/sdp5.jpeg" alt="" class="image-icon-v-big">
+                <div class="ticket-caller-details">
+                  <strong style="font-size:1.5ch">+91 9249278215</strong><br/>
+                  <small style="font-size:1.5ch"><a href="#">+919249278215</a> <span style="color:gray">&#9679; Reply</span></small> 
+                </div>
+              </div>
+              <small style="justify-self:flex-end; color:gray">5d</small>
+              <div class="ticket-call">
+                <img src="/icons/call-ended.png" alt="" class="image-icon-vv-big" style="filter: grayscale(100%);">
+                <div style="font-size:1.5ch; align-items: center; margin-top: 5px;">
+                  <strong>Call Ended</strong> <br />
+                  <small style="color:gray">46 secs</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket">
+            <div class="ticket-sticker"></div>
+            <header class="ticket-header">
+              <h5 style="margin:0px;">Ticket #25382424</h5>
+              <button class="ticket-new-button">New</button>
+            </header>
+            <div class="ticket-content">
+              <div class="ticket-caller" style="display:flex">
+                <img src="/icons/sdp5.jpeg" alt="" class="image-icon-v-big">
+                <div class="ticket-caller-details">
+                  <strong style="font-size:1.5ch">+91 9249278215</strong><br/>
+                  <small style="font-size:1.5ch"><a href="#">+919249278215</a> <span style="color:gray">&#9679; Reply</span></small> 
+                </div>
+              </div>
+              <small style="justify-self:flex-end; color:gray">6d</small>
+              <div class="ticket-call">
+                <img src="/icons/call-ended.png" alt="" class="image-icon-vv-big" style="filter: grayscale(100%);">
+                <div style="font-size:1.5ch; align-items: center; margin-top: 5px;">
+                  <strong>Call Ended</strong> <br />
+                  <small style="color:gray">27 secs</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket">
+            <div class="ticket-sticker"></div>
+            <header class="ticket-header">
+              <h5 style="margin:0px;">Ticket #25382424</h5>
+              <button class="ticket-new-button">New</button>
+            </header>
+            <div class="ticket-content">
+              <div class="ticket-caller" style="display:flex">
+                <img src="/icons/sdp5.jpeg" alt="" class="image-icon-v-big">
+                <div class="ticket-caller-details">
+                  <strong style="font-size:1.5ch">+91 9249278215</strong><br/>
+                  <small style="font-size:1.5ch"><a href="#">+919249278215</a> <span style="color:gray">&#9679; Reply</span></small> 
+                </div>
+              </div>
+              <small style="justify-self:flex-end; color:gray">6d</small>
+              <div class="ticket-call">
+                <img src="/icons/call-ended.png" alt="" class="image-icon-vv-big" style="filter: grayscale(100%);">
+                <div style="font-size:1.5ch; align-items: center; margin-top: 5px;">
+                  <strong>Call Ended</strong> <br />
+                  <small style="color:gray">24 secs</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket">
+            <div class="ticket-sticker"></div>
+            <header class="ticket-header">
+              <h5 style="margin:0px;">Ticket #25382424</h5>
+              <button class="ticket-new-button">New</button>
+            </header>
+            <div class="ticket-content">
+              <div class="ticket-caller" style="display:flex">
+                <img src="/icons/sdp5.jpeg" alt="" class="image-icon-v-big">
+                <div class="ticket-caller-details">
+                  <strong style="font-size:1.5ch">+91 9249278215</strong><br/>
+                  <small style="font-size:1.5ch"><a href="#">+919249278215</a> <span style="color:gray">&#9679; Reply</span></small> 
+                </div>
+              </div>
+              <small style="justify-self:flex-end; color:gray">6d</small>
+              <div class="ticket-call">
+                <img src="/icons/call-ended.png" alt="" class="image-icon-vv-big" style="filter: grayscale(100%);">
+                <div style="font-size:1.5ch; align-items: center; margin-top: 5px;">
+                  <strong>Call Ended</strong> <br />
+                  <small style="color:gray">4 mins 26 secs</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div id="shows-watched">
+        <h3 id="pane-heading" style="margin-bottom: 1ch">Shows Watched Recently</h3>
+        <div id="show-container">
+          <figure style="margin-right: 1ch">
+            <img src="/images/age-of-ultron.jpg" alt="age-of-ultron image" class="show-image">
+            <figcaption style="font-size: 1.5ch">Age of Ultron</figcaption>
+          </figure>
+          <figure style="margin-right: 1ch">
+            <img src="/images/avengers-infinity-war.jpg" alt="age-of-ultron image" class="show-image">
+            <figcaption style="font-size: 1.5ch">Avengers Infinity War</figcaption>
+          </figure>
+          <figure style="margin-right: 1ch">
+            <img src="/images/iron-man-3.jpg" alt="age-of-ultron image" class="show-image">
+            <figcaption style="font-size: 1.5ch">Iron Man 3</figcaption>
+          </figure>
+          <figure style="margin-right: 1ch">
+            <img src="/images/the-endgame.jpg" alt="age-of-ultron image" class="show-image">
+            <figcaption style="font-size: 1.5ch">Endgame</figcaption>
+          </figure>
+          <figure style="margin-right: 1ch">
+            <img src="/images/Thor.jpg" alt="age-of-ultron image" class="show-image">
+            <figcaption style="font-size: 1.5ch">Thor</figcaption>
+          </figure>
+          <figure style="margin-right: 1ch">
+            <img src="/images/iron-man-movie.jpg" alt="age-of-ultron image" class="show-image">
+            <figcaption style="font-size: 1.5ch">Irom Man</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div id="help-articles" style="display:grid">
+        <header id="help-header">
+          <h3 style="margin-top:2ch">Help Articles</h3>
+          <small style="margin-top:2.5ch; justify-self: flex-end; color:gray">View All</small>
+        </header>
+        <form>
+          <input type="text" placeholder="&#9788; &nbsp; Search Articles" id="help-search">
+        </form>
+        <article class="help-article">
+          <h4 style="margin-bottom: 0px">Update current subscription</h4>
+          <p style="color: gray; margin-top: 1ch;">Learn, How to update your current Subscription plan and make a payment</p>
+        </article>
+        <article class="help-article">
+          <h4 style="margin-bottom: 0px">Login issues</h4>
+          <p style="color: gray; margin-top: 1ch;">Learn, How to solve login issues related to your client.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</body>
+
+<script>
+
+var sidebarContainer = document.getElementById("sidebar-container");
+var sidebarToggle = document.getElementById("open-inner-sidebar");
+var span = document.getElementsByClassName("close")[0];
+
+// sidebarContainer.style.display = "block";
+// console.log("Toggle sidebar");
+// sidebarToggle.style.display = "none";
+
+togglesidebar = () => {
+  sidebarContainer.style.display = "block";
+  console.log("Toggle sidebar");
+  sidebarToggle.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == sidebarContainer) {
+    sidebarToggle.style.display = "block";
+    sidebarContainer.style.display = "none";
+  }
+}
+
+
+</script>
+</html>

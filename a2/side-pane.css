@@ -1,0 +1,128 @@
+#side-pane{
+  overflow-y: scroll;
+  border-left: 1px solid #ddd;
+  min-width: 50ch;
+}
+#pane-header p{
+  color: gray;
+  margin: 1ch 0ch;
+}
+#pane-header{
+  padding: 0ch 2.5ch;
+  border-bottom: 1px solid #ddd;
+}
+#pane-heading{
+  margin-bottom: 3ch;
+}
+
+#pane-past-tickets{
+  padding: 0ch 2.5ch;
+  border-bottom: 1px solid #ddd;
+}
+
+#pane-ticket-container{
+  border-left: 2px solid #ddd;
+  padding-left: 2ch;
+}
+
+.ticket{
+  border: 1px solid #ddd;
+  border-radius: 0.5ch;
+  margin-top: 2ch;
+  margin-bottom: 2ch;
+  position: relative;
+}
+
+.ticket-header{
+  background-color: #f7f5f9;
+  padding: 1ch 3ch;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ticket-new-button{
+  justify-self: flex-end;
+  background: blueviolet;
+  border: 0px solid white;
+  border-radius: 4px;
+  padding: 0.5ch 1.7ch;
+  color: white;
+}
+
+.ticket-content{
+  padding: 2ch;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-row-gap: 1.5ch;
+}
+
+.ticket-call{
+  display: flex;
+  padding: 1ch;
+  border: 1px solid #ddd;
+  justify-self: flex-start;
+  border-radius: 2ch;
+}
+
+.ticket-sticker{
+  background-color: black;
+  width: 1.5ch;
+  height: 1.5ch;
+  border-radius: 0.75ch;
+  position: absolute;
+  top: 4ch;
+  left: -3ch;
+}
+
+#shows-watched{
+  padding: 1ch 3ch;
+  overflow-x: scroll;
+}
+
+#show-container{
+  display: flex;
+}
+
+.show-image{
+  margin: 0px;
+  padding: 0px;
+  height: 28ch;
+  width: 20ch;
+  border-radius: 1.4ch;
+}
+
+figure{
+  margin: 0px;
+  padding: 0px;
+}
+
+#help-articles{
+  padding: 1ch 4ch 1ch 3ch;
+}
+
+#help-header{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+#help-search{
+  width: calc(100% - 4ch);
+  margin: auto;
+  padding: 1.5ch 2ch;
+  background-color: #f7f5f9;
+  border-radius: 1ch;
+  border: 1px solid white;
+}
+
+/* #help-search::placeholder::first-letter{ */
+#help-search::placeholder{
+  /* color: aqua; */
+  /* font-size: 100px; */
+}
+
+.help-article{
+  padding: 0ch 2ch;
+  margin-top: 1ch;
+  border: 1px solid #ddd;
+  border-radius: 1ch;
+}
