@@ -130,8 +130,33 @@ html, body, #container, #outer-sidebar{
 
 }
 
+#float-chat{
+  position: fixed;
+  bottom: 3ch;
+  right: 5ch;
+  background-color: black;
+  padding: 1ch 1ch;
+  color: white;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  width: 35ch;
+  border-radius: 1ch;
+}
+
+.mr1{ margin-right: 1ch;}
+
 </style>
 <body>
+<div id="float-chat">
+  <img src="https://amey-kudari.github.io/css/a2/sdp10.jpeg" alt="" class="image-icon-lil-big mr1" style="border-radius:1ch">
+  <h4 style="margin:0px; margin-right: 1ch;">Dr Strange</h4>
+  <small class="mr1">Calling</small>
+  <span style="color:green" class="mr1">00:13</span>
+  <div class="spacer"></div>
+  <img src="https://amey-kudari.github.io/css/a2/call-disconnected.png" alt="" class="image-icon-lil-big">
+</div>
 <div id="container">
   <nav id="outer-sidebar">
     <!-- <i class="home-icon"></i> -->
