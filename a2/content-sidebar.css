@@ -90,15 +90,6 @@
   /* grid-template-columns: 1fr; */
 }
 
-@media only screen and (max-width: 1430px) {
-  #sidebar-header{
-    height: 7ch;
-  }
-  #sidebar-content{
-    height: calc(100ch - 7ch);
-  }
-}
-
 #sidebar-search{
   align-self: center;
   padding: 2ch;

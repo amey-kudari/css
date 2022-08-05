@@ -97,31 +97,43 @@ html, body, #container, #outer-sidebar{
     grid-template-columns: 1fr 1fr;
     width: max-content;
     overflow-x: auto;
-    /* grid-template-rows: 1fr 1fr; */
-    /* overflow-y: scroll; */
   }
   #chat-window{
-    width: calc(100vw - 10ch);
+    width: calc(100vw - 9ch);
+    height: 98vh;
+    padding: 0px;
+    margin: 0px;
   }
 }
 
-@media only screen and (max-width: 755px) {
-  #main-container{
-    grid-template-columns: 1fr 1fr;
-    width: max-content;
-    overflow-x: auto;
-    /* grid-template-rows: 1fr 1fr; */
-    /* overflow-y: scroll; */
+
+#chat-header{ height: 7.5ch; }
+#chat-header-one{ height: 7ch; }
+#chat-box{ height: calc(100vh - 27.5ch); }
+#chat-input{ height: 9ch; }
+
+.cond-br{display:none};
+
+@media only screen and (max-width: 754px) {
+  #chat-header{ height: 10ch; }
+  #chat-box{ height: calc(100vh - 35ch); }
+}
+
+@media only screen and (max-width: 475px) {
+  #chat-header{ height: 12.5ch; }
+  #chat-box{ height: calc(100vh - 37.5ch); }
+  #side-pane{
+    overflow-y: scroll;
+    border-left: 1px solid #ddd;
+    min-width: calc(100vw - 9ch);
   }
-  #chat-window{
-    width: calc(100vw - 10ch);
-  }
+
 }
 
 </style>
 <body>
 <div id="container">
-  <div id="outer-sidebar">
+  <nav id="outer-sidebar">
     <!-- <i class="home-icon"></i> -->
     <button class="outer-buttons netflix-logo">
       <img src="https://amey-kudari.github.io/css/a2/netflix.png" alt="">
@@ -141,19 +153,17 @@ html, body, #container, #outer-sidebar{
     <button class="outer-buttons">
       <img src="https://amey-kudari.github.io/css/a2/comment.png" alt="" class="invert-image">
     </button>
-
-    <div id="outer-sidebar-footer">
-      <button class="outer-buttons">
-        <img src="https://amey-kudari.github.io/css/a2/dp.jpg" alt="" class="dp">
-      </button>
-      <button class="outer-buttons">
-        <img src="https://amey-kudari.github.io/css/a2/settings.png" alt="" class="invert-image">
-      </button>
-      <button class="outer-buttons">
-        <img src="https://amey-kudari.github.io/css/a2/bell.png" alt="" class="invert-image">
-      </button>
-    </div>
-  </div>
+    <div class="spacer"></div>
+    <button class="outer-buttons">
+      <img src="https://amey-kudari.github.io/css/a2/bell.png" alt="" class="invert-image">
+    </button>
+    <button class="outer-buttons">
+      <img src="https://amey-kudari.github.io/css/a2/settings.png" alt="" class="invert-image">
+    </button>
+    <button class="outer-buttons">
+      <img src="https://amey-kudari.github.io/css/a2/dp.jpg" alt="" class="dp">
+    </button>
+  </nav>
   <button id="open-inner-sidebar" onclick="togglesidebar()"> &gt; </button>
   <div id="sidebar-container">
     <aside id="content-sidebar">
@@ -276,7 +286,7 @@ html, body, #container, #outer-sidebar{
               <div class="sidebar-indicator-dot"></div>
             </div>
             <div class="number">
-              <h4><img src="https://amey-kudari.github.io/css/a2/sdp4.jpeg" alt="" class="image-icon-v-big"> <span class="number-value">+91 9223112321 </span></h4>
+              <h4><img src="https://amey-kudari.github.io/css/a2/sdp4.jpeg" alt="" class="image-icon-v-big"><span class="number-value">+91 9223112321 </span></h4>
             </div>
             <footer class="sidebar-card-footer">
               <p><img src="https://amey-kudari.github.io/css/a2/contact-book.png" alt="" class="image-icon-big"> July 25, 2022</p>
@@ -291,10 +301,15 @@ html, body, #container, #outer-sidebar{
   <div id="main-container">
     <div id="chat-window">
       <header id="chat-header">
-        <h2 class="chat-head-one"><span style="font-weight:500;">Case</span> #1231222 <span class="yellow-tag">OPEN</span></h2>
+        <div class="chat-head-one" style="display:flex; flex-wrap: wrap-reverse; align-items: center;">
+          <h2 style="font-weight:500; margin:0px;">
+            Case #1231222
+          </h2>
+          <span class="yellow-tag">OPEN</span>
+        </div>
         <div id="chat-person-details">
           <img src="https://amey-kudari.github.io/css/a2/sdp10.jpeg" alt="" class="image-icon-vv-big">
-          <h3>Doctor Strange</h3>
+          <h3 style="margin:0px;font-weight:500; text-align: right;">Doctor Strange</h3>
         </div>
       </header>
       <header id="chat-header-1">
@@ -650,10 +665,10 @@ html, body, #container, #outer-sidebar{
           </figure>
         </div>
       </div>
-      <div id="help-articles" style="display:grid">
+      <div id="help-articles">
         <header id="help-header">
-          <h3 style="margin-top:2ch">Help Articles</h3>
-          <small style="margin-top:2.5ch; justify-self: flex-end; color:gray">View All</small>
+          <h3 style="margin-top:2ch; flex:1">Help Articles</h3>
+          <a style="margin-top:2.5ch; justify-self: flex-end; color:gray" href="#">View All</a>
         </header>
         <form>
           <input type="text" placeholder="&#9788; &nbsp; Search Articles" id="help-search">

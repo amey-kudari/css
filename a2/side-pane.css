@@ -3,6 +3,7 @@
   border-left: 1px solid #ddd;
   min-width: 50ch;
 }
+
 #pane-header p{
   color: gray;
   margin: 1ch 0ch;
@@ -38,6 +39,7 @@
   padding: 1ch 3ch;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
 }
 
 .ticket-new-button{
@@ -101,7 +103,7 @@ figure{
 }
 
 #help-header{
-  display: grid;
+  display: flex;
   grid-template-columns: 2fr 1fr;
 }
 
