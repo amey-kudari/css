@@ -21,7 +21,9 @@ html, body, #container, #outer-sidebar{
   margin: 0px;
   font-family: 'Roboto', sans-serif;
   /* font-family: 'Poppins', sans-serif; */
-
+}
+body{
+  height: 100vh;
 }
 
 #container{
@@ -92,6 +94,12 @@ html, body, #container, #outer-sidebar{
 
 .br-0{ border-radius: 0px;}
 
+
+#chat-window{
+  height: 100%;
+}
+
+
 @media only screen and (max-width: 1200px) {
   #main-container{
     grid-template-columns: 1fr 1fr;
@@ -107,10 +115,10 @@ html, body, #container, #outer-sidebar{
 }
 
 
-#chat-header{ height: 7.5ch; }
+/* #chat-header{ height: 7.5ch; }
 #chat-header-one{ height: 7ch; }
 #chat-box{ height: calc(100vh - 27.5ch); }
-#chat-input{ height: 9ch; }
+#chat-input{ height: 9ch; } */
 
 .cond-br{display:none};
 
@@ -155,6 +163,18 @@ html, body, #container, #outer-sidebar{
 }
 
 .mr1{ margin-right: 1ch;}
+
+.p-trucate{
+  color: gray;
+  margin-top: 1ch;
+  overflow:hidden;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
 
 </style>
 <body>
@@ -709,7 +729,8 @@ html, body, #container, #outer-sidebar{
         </form>
         <article class="help-article">
           <h4 style="margin-bottom: 0px">Update current subscription</h4>
-          <p style="color: gray; margin-top: 1ch;">Learn, How to update your current Subscription plan and make a payment</p>
+          <p class="p-trucate">Learn, How to update your current Subscription plan and make a payment Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi rem incidunt, quas nostrum placeat exercitationem totam dolorum ipsam voluptas quaerat ex quod voluptate explicabo soluta, voluptatum dolorem itaque molestiae ab eveniet sed. Eveniet fugit quo, aut illum ut tempore blanditiis fugiat aliquid modi sapiente tempora, qui molestias praesentium. Earum ratione alias accusamus molestias eveniet! Sunt, in porro quisquam eos molestias illum optio! Vitae odio corrupti minus vero! Deleniti voluptates sequi nulla dolore unde, nemo nam porro dicta ducimus officiis, minus quisquam commodi eum. Maiores, dicta cumque natus laborum debitis voluptates est mollitia porro neque minima id eius deserunt dignissimos! Fugiat soluta nesciunt omnis ab dolores, mollitia in eligendi harum quis accusamus itaque neque eaque quidem aspernatur aliquam consequuntur debitis commodi quaerat culpa aperiam eveniet rerum voluptas doloribus qui! Vitae nisi vel atque voluptate itaque. Natus corporis adipisci, ut numquam deserunt odio perferendis nulla deleniti magni veniam, autem eveniet, est obcaecati distinctio aperiam sed beatae voluptates enim explicabo quia quidem! Eius maxime, aliquid dolor unde quod facilis necessitatibus esse aperiam quae ducimus totam! Dignissimos vel aspernatur adipisci numquam placeat reiciendis, molestiae eligendi perferendis culpa iste aperiam cumque laboriosam soluta quae nostrum, commodi quis, eius nisi vero. Sunt tempore quod incidunt, magni molestiae dolorum sint inventore quae tempora laudantium optio quisquam. Qui voluptatum inventore quaerat corrupti, necessitatibus vero dicta numquam dolorem laudantium. Harum maxime possimus optio enim libero quaerat alias, at vitae ex expedita modi earum molestiae, accusantium veniam excepturi quam ullam dolorum sint. Similique, qui. Quam quasi alias ipsum necessitatibus perspiciatis saepe voluptas, vel omnis illo explicabo!
+          </p>
         </article>
         <article class="help-article">
           <h4 style="margin-bottom: 0px">Login issues</h4>
