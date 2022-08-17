@@ -210,10 +210,10 @@ function runner(){
       const task = tasks.shift();
       dotask(task);
       updateTaskList();
-      runner();
+      if(tasks.length > 0) runner();
+      else running=false;
     }, 2000);
   }
-  running=false;
 }
 
 const timenow = () => {
