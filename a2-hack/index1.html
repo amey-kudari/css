@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS A2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<style>
+
+
+html, body, .st-container, .st-pusher, .st-content {
+	height: 100%;
+  margin: 0px;
+  overflow: hidden;
+}
+
+body{
+  display: flex;
+}
+
+.st-content {
+	background: #f3efe0;
+}
+
+.st-content, .st-content-inner {
+	position: relative;
+}
+
+.st-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.st-pusher {
+	position: relative;
+	left: 0;
+	z-index: 99;
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+}
+
+.st-pusher::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	background: rgba(0,0,0,0.2);
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+	transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+.st-menu-open .st-pusher::after {
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.st-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	visibility: hidden;
+	width: 300px;
+	height: 100%;
+	background: #48a770;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.st-menu::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.2);
+	content: '';
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.st-menu-open .st-menu::after {
+	width: 0;
+	height: 0; 
+	opacity: 0;
+	-webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+	transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+/* Effect 1: Slide in on top */
+.expand-button.st-menu {
+	visibility: visible;
+	-webkit-transform: translate3d(-100%, 0, 0);
+	transform: translate3d(-100%, 0, 0);
+}
+
+.expand-button.st-menu-open .expand-button.st-menu {
+	visibility: visible;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.expand-button.st-menu::after {
+	display: none;
+}
+
+#exp-but{
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  font-size: small;
+  border-radius: 50%;
+  border: 1px solid black;
+  position: fixed;
+  top: 50%;
+  left: -10px;
+}
+
+#outer-side{
+  flex: 1;
+}
+
+#outer-side i{
+  width: 100px;
+  height: 100px;
+}
+
+.st-container{
+  flex: 1;
+}
+
+</style>
+
+<body>
+  <div id="outer-side">
+    <i class="fa-solid fa-house"></i>
+  </div>
+  <div id="st-container" class="st-container">
+    <nav class="st-menu expand-button" id="menu-1">
+      <h2 class="icon icon-lab">Sidebar</h2>
+      <ul>
+        <li><a class="icon icon-data" href="#">Data Management</a></li>
+        <li><a class="icon icon-location" href="#">Location</a></li>
+        <li><a class="icon icon-study" href="#">Study</a></li>
+        <li><a class="icon icon-photo" href="#">Collections</a></li>
+        <li><a class="icon icon-wallet" href="#">Credits</a></li>
+      </ul>
+    </nav>
+    <div class="st-pusher">  
+      <div class="st-content">
+        <!-- this is the wrapper for the content -->
+        <div class="st-content-inner">
+          <!-- extra div for emulating position:fixed of the menu -->
+          <!-- Top Navigation -->
+          <header class="codrops-header">
+            <h1>Sidebar Transitions <span>Transition effects for off-canvas views</span></h1>
+          </header>
+          <div class="main clearfix">
+            <div id="st-trigger-effects" class="column">
+              <button data-effect="expand-button" id="exp-but">.&gt;</button>
+            </div>
+            <div class="column">
+              <p>Sidebar menus or off-canvas navigations can be revealed in many creative ways.</p>
+              <p>Here is some inspiration for showing them in style using CSS transitions.</p>
+            </div>
+          </div>
+          <!-- /main -->
+        </div>
+        <!-- /st-content-inner -->
+      </div>
+      <!-- /st-content -->
+    </div>
+  </div>
+</body>
+<script>
+var click = document.querySelectorAll('div button');
+var menu = document.querySelector('#st-container');
+var pusher = document.querySelector('.st-pusher');
+// to store the corresponding effect
+var effect;
+
+for (var i = 0; i < click.length; i++) {
+  click[i].addEventListener('click', e => {
+    effect = e.target.getAttribute('data-effect');
+    // adding the effects
+    menu.classList.toggle(effect);
+    menu.classList.toggle('st-menu-open');
+  })
+}
+
+pusher.addEventListener('click', e => {
+  if (e.target.classList.contains('st-pusher')) {
+    menu.classList.toggle(effect);
+    menu.classList.toggle('st-menu-open');
+  } 
+});
+
+</script>
+</html>
