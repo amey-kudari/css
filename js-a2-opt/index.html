@@ -158,8 +158,8 @@ th{
 
 <body>
   <nav id="navbar" style="position: sticky; top:0;">
-    <a class="navlink selected-navlink" href="https://amey-kudari.github.io/css/js-a2/">Typeracer v2</a>
-    <a class="navlink" href="https://amey-kudari.github.io/css/js-a2-opt/">Typeracer v3</a>
+    <a class="navlink" href="https://amey-kudari.github.io/css/js-a2/">Typeracer v2</a>
+    <a class="navlink selected-navlink" href="https://amey-kudari.github.io/css/js-a2-opt/">Typeracer v3</a>
     <a class="navlink" href="https://amey-kudari.github.io/css/js-a2-v4/">Typeracer v4</a>
   </nav>
   <div style="margin:auto; width:fit-content; margin-top: 2rem;" class="type-box">
@@ -247,36 +247,50 @@ const wpmupdate = () => {
     console.log(secLeft);
     dq('#time-left').innerHTML = secLeft;
 
-    let matcher = text.slice(0, added.length);
-    console.log(added.split(' '), ts);
-    let words = lcs(added.split(' '), ts);
+    let correct = ``;
+    let incorrect = ``;
+    let left = ``;
+    for(let i=0;i<added.length;i++){
+      if(text[i] === added[i]){
+        correct = correct + added[i];
+      } else break;
+    }
+    let words = correct.replace('   ', ' ').replace('  ', ' ').split(' ').length + (correct.length === text.length);
     let timedone = (timenow - fromTime)/1000;
     let wpm = parseInt((words / timedone) * 60);
-    let accuracy = Math.ceil(100*words/matcher.split(' ').length);
     dq('#wpm').innerHTML = wpm;
-    dq('#accuracy').innerHTML = accuracy;
   }
 }
 
 setInterval(wpmupdate, 1000);
 
 const textupdate = () => {
+  console.log(added, text);
   if(added.length <= text.length){
     let newtext = ``;
+    let correct = ``;
+    let incorrect = ``;
+    let left = ``;
     for(let i=0;i<added.length;i++){
-      if(added[i] === text[i]){
-        newtext += `<span class='correct'>${text[i]}</span>`;
-      } else newtext += `<span class='wrong'><u>${text[i]}</u></span>`;
+      if(text[i] === added[i]){
+        correct = correct + added[i];
+      } else break;
     }
-    let remaining = text.slice(added.length)
-    if(remaining.length > 0){
-      newtext += `<span class='text-gray'><u>${remaining[0]}</u></span>`
-      newtext += `<span class='text-gray'>${remaining.slice(1)}</span>`;
+    if(added.length - 3 > correct.length){ // revert it now
+      added = added.slice(0, correct.length + 3);
     }
-    progress(parseInt(80 * (added.length / text.length)))
+    incorrect = text.slice(0, added.length).slice(correct.length);
+    left = text.slice(added.length);
+    newtext = `<span class='correct'>${correct}</span>`;
+    if(incorrect.length) newtext += `<span class='wrong'>${incorrect}</span>`;
+    if(left.length > 0){
+      newtext += `<span class='text-gray'><u id="target-letter">${left[0]}</u></span>`
+      newtext += `<span class='text-gray'>${left.slice(1)}</span>`;
+    }
     question.innerHTML = newtext;
+    progress((80 * (correct.length / text.length)))
     input.value = added.split(' ').at(-1) + '|';
-    if(added.length === text.length && state === 'running'){
+    if(correct.length === text.length){
       state = 'completed';
       input.value = '';
       dq('#landing').style.display = 'block';
@@ -352,6 +366,10 @@ window.addEventListener('keydown', e => {
   if(e.key === 'Backspace'){
     added = added.slice(0, added.length - 1);
   } else if(e.key.length === 1){
+    if(e.keyCode == 32) {
+      console.log("ASDFASDF");
+      e.preventDefault();
+    }
     added+= e.key;
   }
   textupdate();

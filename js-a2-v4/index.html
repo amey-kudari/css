@@ -158,9 +158,9 @@ th{
 
 <body>
   <nav id="navbar" style="position: sticky; top:0;">
-    <a class="navlink selected-navlink" href="https://amey-kudari.github.io/css/js-a2/">Typeracer v2</a>
+    <a class="navlink" href="https://amey-kudari.github.io/css/js-a2/">Typeracer v2</a>
     <a class="navlink" href="https://amey-kudari.github.io/css/js-a2-opt/">Typeracer v3</a>
-    <a class="navlink" href="https://amey-kudari.github.io/css/js-a2-v4/">Typeracer v4</a>
+    <a class="navlink selected-navlink" href="https://amey-kudari.github.io/css/js-a2-v4/">Typeracer v4</a>
   </nav>
   <div style="margin:auto; width:fit-content; margin-top: 2rem;" class="type-box">
     <h1 style="text-align: center; color:#f39a00">Track</h1>
@@ -263,12 +263,34 @@ setInterval(wpmupdate, 1000);
 const textupdate = () => {
   if(added.length <= text.length){
     let newtext = ``;
+    let toAdd = [];
     for(let i=0;i<added.length;i++){
       if(added[i] === text[i]){
-        newtext += `<span class='correct'>${text[i]}</span>`;
-      } else newtext += `<span class='wrong'><u>${text[i]}</u></span>`;
+        // newtext += `<span class='correct'>${text[i]}</span>`;
+        if(toAdd.length){
+          if(toAdd.at(-1).cname === 'correct'){
+            toAdd.at(-1).text += text[i];
+          } else {
+            toAdd.push({cname : 'correct', text : text[i]})
+          }
+        } else {
+          toAdd.push({cname : 'correct', text : text[i]})
+        }
+      } else{
+        // newtext += `<span class='wrong'><u>${text[i]}</u></span>`;
+        if(toAdd.length){
+          if(toAdd.at(-1).cname === 'wrong'){
+            toAdd.at(-1).text += text[i];
+          } else {
+            toAdd.push({cname : 'wrong', text : text[i]})
+          }
+        } else {
+          toAdd.push({cname : 'wrong', text : text[i]})
+        }
+      }
     }
-    let remaining = text.slice(added.length)
+    toAdd.forEach(toAddi => newtext += `<span class='${toAddi.cname}'>${toAddi.text}</span>`);
+    let remaining = text.slice(added.length);
     if(remaining.length > 0){
       newtext += `<span class='text-gray'><u>${remaining[0]}</u></span>`
       newtext += `<span class='text-gray'>${remaining.slice(1)}</span>`;
