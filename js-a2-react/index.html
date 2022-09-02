@@ -39,6 +39,7 @@ body{
 
 .type-box{
   max-width: 60%;
+  min-width: 60%;
   margin-top: 2rem;
   margin:auto;
   border: 1px solid #f59f0a;
@@ -93,6 +94,7 @@ table, td, th{
 @media only screen and (max-width: 1000px){
   .type-box{
     max-width: 95%;
+    min-width: 95%;
     padding-top: 2rem;
   }
 }
@@ -164,11 +166,15 @@ th{
 
 #input{width:calc(100% - 1rem); padding: 0.5rem; font-size: 1rem; border-radius: 1rem; background: rgba(249,241,229,255);}
 #username{width:calc(100% - 1rem); padding: 0.5rem; font-size: 1rem; border-radius: 1rem; background: rgba(249,241,229,255);}
+input:focus{
+  border: 1px solid #f59f0a;
+}
+
 
 </style>
 
 <body>
-  <nav id="navbar" style="position: sticky; top:0;">
+  <nav id="navbar" style="position: sticky; top:0; overflow-x: auto;">
     <a class="navlink" href="https://amey-kudari.github.io/css/js-a2/">Typeracer v2</a>
     <a class="navlink" href="https://amey-kudari.github.io/css/js-a2-opt/">Typeracer v3</a>
     <a class="navlink" href="https://amey-kudari.github.io/css/js-a2-v4/">Typeracer v4</a>
@@ -195,7 +201,7 @@ function Progress({prog=0}){
   )
 }
 
-function TypingDiv({added, setAdded, setProg, prog, updateWPM, setCurrent}){
+function TypingDiv({added, setAdded, setProg, prog, updateWPM, current, setCurrent}){
   let newtext = ``;
   let correct = ``;
   let incorrect = ``;
@@ -209,7 +215,7 @@ function TypingDiv({added, setAdded, setProg, prog, updateWPM, setCurrent}){
     left = text.slice(added.length);
     setProg((80 * (correct.length / text.length)));
     console.log(prog);
-    if(correct.length === text.length){
+    if(correct.length === text.length && current === 'running'){
       setCurrent("done");
     }
   }
@@ -235,7 +241,9 @@ function TypingDiv({added, setAdded, setProg, prog, updateWPM, setCurrent}){
   )
 }
 
-function Results({timeLeft, wpm, current}){
+// timeLeft, wpm, current, setCurrent, leaderBoard, SetLeaderBoard
+function Results({timeLeft, wpm, current, setCurrent, leaderBoard, SetLeaderBoard}){
+  const [name, setName] = React.useState();
   return(
     <div id="result-div">
       {current === 'done' && <h2 id="completed" style={{"marginTop": "0px"}}>Completed! Frozen results: </h2> }
@@ -243,8 +251,12 @@ function Results({timeLeft, wpm, current}){
         <tr><td>TIME LEFT</td><td id="time-left">{timeLeft}</td></tr>
         <tr><td>WPM</td><td id="wpm">{wpm}</td></tr>
       </tbody></table>
-      {current === 'done' && <form style={{"marginTop":"2rem"}} id="leaderboard-add">
-        <input placeholder="Add your name to leaderboard" id="username"/>
+      {current === 'done' && <form style={{"marginTop":"2rem"}} id="leaderboard-add" onSubmit={e=>{
+        e.preventDefault();
+        SetLeaderBoard(leaderBoard.concat([{name, wpm}]));
+        setCurrent('trail');
+      }}>
+        <input placeholder="Add your name to leaderboard" id="username" value={name} onChange={e=>setName(e.target.value)}/>
       </form>}
     </div>
   )
@@ -252,14 +264,14 @@ function Results({timeLeft, wpm, current}){
 
 function App(){
   const [prog, setProg] = React.useState(0);
-  // const [added, setAdded] = React.useState('');
-  const [added, setAdded] = React.useState(text.slice(0, text.length - 3));
+  const [added, setAdded] = React.useState('');
+  // const [added, setAdded] = React.useState(text.slice(0, text.length - 3));
   const [wpm, setWpm] = React.useState('');
   const [timeStarted, setTimeStarted] = React.useState(new Date());
-  const [timeLeft, setTimeLeft] = React.useState(0);
+  const [timeLeft, setTimeLeft] = React.useState(100);
   const [current, setCurrent] = React.useState('Trial'); 
   const [startingIn, setStartingIn] = React.useState(0);
-  const [leaderBoard, SetLeaderBoard] = React.useState([]);
+  const [leaderBoard, SetLeaderBoard] = React.useState([{name: 'Amey', wpm: '93'}]);
 
   const updateWPM = () => {
     if(current === 'running'){
@@ -282,23 +294,28 @@ function App(){
     return () => clearInterval(wpmInterval);
   });
   return(<>
+    <button style={{position: 'fixed', right: '1rem', bottom: '1rem'}} onClick={()=>setAdded(text.slice(0, text.length-3))}>.</button>
     <div style={{}} className="type-box">
       <h1 style={{"textAlign": "center", color:"#f39a00"}}>Track</h1>
       <Progress prog={prog}/>
-      <TypingDiv added={added} setAdded={setAdded} prog={prog} setProg={setProg} updateWPM={updateWPM} setCurrent={setCurrent}/>
-      {startingIn === 0 && <Results timeLeft={timeLeft} wpm={wpm} current={current}/>}
+      <TypingDiv added={added} setAdded={setAdded} prog={prog} setProg={setProg} updateWPM={updateWPM} current={current} setCurrent={setCurrent}/>
+      {startingIn === 0 && ['done', 'running'].includes(current) && <Results 
+        timeLeft={timeLeft} wpm={wpm} current={current} setCurrent={setCurrent} leaderBoard={leaderBoard} SetLeaderBoard={SetLeaderBoard}
+      />}
       {startingIn === 0 && <div id="landing">
         <button id="launch" onClick={e => {
           setCurrent('starting');
           console.log("current", current);
+          setTimeLeft(100);
           setStartingIn(3);
           setTimeout(() => setStartingIn(2), 1000);
           setTimeout(() => setStartingIn(1), 2000);
           setTimeout(() => {
             setTimeStarted(new Date());
-            // setAdded('');
-            setAdded(text.slice(0, text.length-3));
+            setAdded('');
+            // setAdded(text.slice(0, text.length-3));
             setCurrent('running');
+            updateWPM();
             setStartingIn(0);
           }, 3000);
         }}>NEW LAUNCH!</button>
@@ -306,7 +323,24 @@ function App(){
       {startingIn > 0 && <div id="starting">
         <p>Starting in <span id="starting-in">{startingIn}</span></p>
       </div>}
-    </div>
+    </div> <br />
+    <div className="type-box">
+      <h1 style={{"textAlign":"center", "color":"#f39a00"}}>Leader Board</h1>
+      <table className="leaderboard">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>WPM</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-values">
+          {[].concat(leaderBoard).sort((a,b) => a.wpm - b.wpm).map((entry, key) => (<tr key={entry.name + entry.wpm}>
+            <td style={{"textAlign":"center"}}>{entry.name}</td>
+            <td style={{"textAlign":"center"}}>{entry.wpm}</td>
+          </tr>))}
+        </tbody>
+      </table>
+    </div> <br />
   </>)
 }
 ReactDOM.render(<App />, document.querySelector('#react-container'))
