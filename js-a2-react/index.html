@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>typeracer gen2</title>
+</head>
+<style>
+body{ 
+  margin: 0rem; 
+  font-family: 'Courier New', monospace; 
+  height: 100%;
+  width: 100%;
+  position: relative;
+  /* background: rgba(249,241,229,255) */
+  /* background: rgba(255, 166, 0, 0.04); */
+  /* background: rgba(255, 166, 0, 0.04); */
+}
+#result-div, #landing, #starting{
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+#typing-div{
+  margin: 1rem 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #f59f0a;
+  background: #f59f0a1f;
+}
+
+#result-div{
+  margin: 1rem 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #f59f0a;
+}
+
+.type-box{
+  max-width: 60%;
+  margin-top: 2rem;
+  margin:auto;
+  border: 1px solid #f59f0a;
+  border-radius: 1rem;
+  background: rgba(249,241,229,255);
+  margin:auto;
+  width:fit-content;
+  margin-top: 2rem;
+}
+#progress{
+  background: #f59f0abe;
+  /* background: #f59f0a; */
+  border-radius: 1rem;
+  width: calc(100% - 4rem);
+  margin: 1rem 2rem;
+}
+#pusher{
+  background: #f59f0a;
+  height: 100%;
+}
+#rocket{
+  width: 20%;
+  border-radius: 1rem;
+}
+#launch{
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  background: #f59f0abe;
+  border-radius: 1rem;
+  border: 1px solid white;
+  color: rgb(59, 59, 59);
+  font-weight: 600;
+}
+
+#launch:hover{
+  border: 1px solid yellow;
+  background: #f59f0a;
+  cursor: pointer;
+}
+
+table{
+  min-width:70%;
+}
+table, td, th{
+  border-bottom: 1px solid #f59f0a;
+  border-top: 1px solid #f59f0a;
+  border-collapse: collapse;
+  padding: 0.5rem;
+}
+
+@media only screen and (max-width: 1000px){
+  .type-box{
+    max-width: 95%;
+    padding-top: 2rem;
+  }
+}
+
+.correct{color: green; }
+.wrong{color: red; text-decoration-line: underline;}
+.text-gray{color: rbg(240, 240, 240);}
+
+#navbar{
+  width: 60%;
+  height: 4rem;
+  background-color: #412c09;
+  display: flex;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.navlink{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: rgb(255, 228, 188);
+  padding-left: 2rem;
+  padding-right: 2rem;
+  cursor: pointer;
+  text-decoration-line: none;
+}
+
+.selected-navlink{
+  background-color: #2c1e06;
+}
+
+.navlink:hover{
+  background-color: #2c1e06;
+}
+
+
+@media only screen and (max-width: 1000px){
+  #navbar{
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    width: 95%;
+  }
+}
+
+.leaderboard{
+  width: 90%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+th{
+  background: rgb(255, 224, 177);
+}
+
+#question{
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+#react-container{
+  margin: 0px;
+  padding: 0px;
+}
+
+#input{width:calc(100% - 1rem); padding: 0.5rem; font-size: 1rem; border-radius: 1rem; background: rgba(249,241,229,255);}
+#username{width:calc(100% - 1rem); padding: 0.5rem; font-size: 1rem; border-radius: 1rem; background: rgba(249,241,229,255);}
+
+</style>
+
+<body>
+  <nav id="navbar" style="position: sticky; top:0;">
+    <a class="navlink" href="https://amey-kudari.github.io/css/js-a2/">Typeracer v2</a>
+    <a class="navlink" href="https://amey-kudari.github.io/css/js-a2-opt/">Typeracer v3</a>
+    <a class="navlink" href="https://amey-kudari.github.io/css/js-a2-v4/">Typeracer v4</a>
+    <a class="navlink selected-navlink" href="https://amey-kudari.github.io/css/js-a2-react/">Typeracer v3 React</a>
+  </nav>
+  <div id="react-container"></div>
+</body>
+
+<script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+
+<script type="text/babel">
+// import React, { useEffect, useState } from "react";
+const text = "What's the best thing about Switzerland? I don't know, but the flag is a big plus; I invented a new word: Plagiarism!; How many times can you subtract 10 from 100? Once. The next time you would be subtracting 10 from 90.";
+
+function Progress({prog=0}){
+  console.log("PROGRESS", prog);
+  return(
+    <div id="progress" style={{"display":"flex"}}>
+      <div id="pusher" style={{width: prog + '%'}}></div>
+      <img src={"https://ik.imagekit.io/amey/rocket_26-YUTg7Q.png?ik-sdk-version=javascript-1.4.3&updatedAt=1660895719428"} alt="ROCKET" id="rocket" />
+    </div>
+  )
+}
+
+function TypingDiv({added, setAdded, setProg, prog, updateWPM, setCurrent}){
+  let newtext = ``;
+  let correct = ``;
+  let incorrect = ``;
+  let left = ``;
+
+  added = added.slice(0, text.length);
+  if(added.length <= text.length){
+    for(let i=0;i<added.length;i++){ if(text[i] === added[i]) correct = correct + added[i]; else break; }
+    if(added.length - 3 > correct.length) setAdded(added.slice(0, Math.min(correct.length + 3, text.length)));
+    incorrect = text.slice(0, added.length).slice(correct.length);
+    left = text.slice(added.length);
+    setProg((80 * (correct.length / text.length)));
+    console.log(prog);
+    if(correct.length === text.length){
+      setCurrent("done");
+    }
+  }
+  return(
+    <div id="typing-div">
+      <p id="question" style={{marginTop: "0px"}}>
+        <span className='correct'>{correct}</span>
+        <span className='wrong'>{incorrect}</span>
+        {left.length > 0 && <>
+          <span className='text-gray'><u id="target-letter">{left[0]}</u>{left.slice(1)}</span>
+        </>}
+      </p>
+      <input id="input" value={added.split(' ').at(-1)} onKeyDown={e=> {
+        if(e.keyCode === 8){
+          setAdded(added.slice(0, added.length - 1));
+        } else if(e.key.length === 1){
+          if(e.keyCode == 32) e.preventDefault();
+          setAdded(added+ e.key);
+        }
+        if(added.length % 3 === 0) updateWPM();
+      }} onChange={()=>{}}/>
+    </div>
+  )
+}
+
+function Results({timeLeft, wpm, current}){
+  return(
+    <div id="result-div">
+      {current === 'done' && <h2 id="completed" style={{"marginTop": "0px"}}>Completed! Frozen results: </h2> }
+      <table style={{"margin":"auto"}}><tbody>
+        <tr><td>TIME LEFT</td><td id="time-left">{timeLeft}</td></tr>
+        <tr><td>WPM</td><td id="wpm">{wpm}</td></tr>
+      </tbody></table>
+      {current === 'done' && <form style={{"marginTop":"2rem"}} id="leaderboard-add">
+        <input placeholder="Add your name to leaderboard" id="username"/>
+      </form>}
+    </div>
+  )
+}
+
+function App(){
+  const [prog, setProg] = React.useState(0);
+  // const [added, setAdded] = React.useState('');
+  const [added, setAdded] = React.useState(text.slice(0, text.length - 3));
+  const [wpm, setWpm] = React.useState('');
+  const [timeStarted, setTimeStarted] = React.useState(new Date());
+  const [timeLeft, setTimeLeft] = React.useState(0);
+  const [current, setCurrent] = React.useState('Trial'); 
+  const [startingIn, setStartingIn] = React.useState(0);
+  const [leaderBoard, SetLeaderBoard] = React.useState([]);
+
+  const updateWPM = () => {
+    if(current === 'running'){
+      let timenow = new Date();
+      let secLeft = Math.max(100 - parseInt((timenow - timeStarted)/1000), 0);
+      setTimeLeft(secLeft);
+      let correct = ``;
+      for(let i=0;i<added.length;i++){
+        if(text[i] === added[i]){
+          correct = correct + added[i];
+        } else break;
+      }
+      let words = correct.replace('   ', ' ').replace('  ', ' ').split(' ').length + (correct.length === text.length);
+      let timedone = (timenow - timeStarted)/1000;
+      setWpm(parseInt((words / timedone) * 60));
+    }
+  }
+  React.useEffect(() => {
+    const wpmInterval = setInterval(updateWPM, 1000);
+    return () => clearInterval(wpmInterval);
+  });
+  return(<>
+    <div style={{}} className="type-box">
+      <h1 style={{"textAlign": "center", color:"#f39a00"}}>Track</h1>
+      <Progress prog={prog}/>
+      <TypingDiv added={added} setAdded={setAdded} prog={prog} setProg={setProg} updateWPM={updateWPM} setCurrent={setCurrent}/>
+      {startingIn === 0 && <Results timeLeft={timeLeft} wpm={wpm} current={current}/>}
+      {startingIn === 0 && <div id="landing">
+        <button id="launch" onClick={e => {
+          setCurrent('starting');
+          console.log("current", current);
+          setStartingIn(3);
+          setTimeout(() => setStartingIn(2), 1000);
+          setTimeout(() => setStartingIn(1), 2000);
+          setTimeout(() => {
+            setTimeStarted(new Date());
+            // setAdded('');
+            setAdded(text.slice(0, text.length-3));
+            setCurrent('running');
+            setStartingIn(0);
+          }, 3000);
+        }}>NEW LAUNCH!</button>
+      </div>}
+      {startingIn > 0 && <div id="starting">
+        <p>Starting in <span id="starting-in">{startingIn}</span></p>
+      </div>}
+    </div>
+  </>)
+}
+ReactDOM.render(<App />, document.querySelector('#react-container'))
+</script>
+</html>
