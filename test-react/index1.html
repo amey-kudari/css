@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>typeracer gen2</title>
+</head>
+<style>
+body{ 
+  margin: 0rem; 
+  font-family: 'Courier New', monospace; 
+  height: 100%;
+  width: 100%;
+  position: relative;
+  /* background: rgba(249,241,229,255) */
+  /* background: rgba(255, 166, 0, 0.04); */
+  /* background: rgba(255, 166, 0, 0.04); */
+}
+
+</style>
+
+<body>
+  <div id="react-container"></div>
+</body>
+
+<script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+
+<script type="text/babel">
+
+function App() {
+  const [show, setShow] = React.useState(false);
+  const popup = React.useRef();
+  const button = React.useRef();
+  React.useEffect(() => {
+    if(popup.current == null || button.current == null) return;
+    const { bottom } = button.current.getBoundingClientRect();
+    popup.current.style.top = `${bottom + 30}px`;
+  }, [show]);
+  return(<>
+    <button ref={button} onClick={() => setShow(prev => !prev)}>CHANGE</button>
+    {show && <div style={{position: 'absolute'}} ref={popup}>
+      USE EFFECT VS USE LAYOUT EFFECT
+    </div>}
+  </>);
+}
+ReactDOM.render(<App />, document.querySelector('#react-container'))
+</script>
+</html>

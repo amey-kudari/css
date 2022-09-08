@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>typeracer gen2</title>
+</head>
+<style>
+body{ 
+  margin: 0rem; 
+  font-family: 'Courier New', monospace; 
+  height: 100%;
+  width: 100%;
+  position: relative;
+  /* background: rgba(249,241,229,255) */
+  /* background: rgba(255, 166, 0, 0.04); */
+  /* background: rgba(255, 166, 0, 0.04); */
+}
+
+</style>
+
+<body>
+  <div id="react-container"></div>
+</body>
+
+<script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+
+<script type="text/babel">
+
+function App() {
+  const ref = React.useRef();
+  const ref1 = React.useRef();
+  const [color, setColor] = React.useState("black");
+  const randomColor = () => {
+    return `rgb(${parseInt(Math.random() * 256)},${parseInt(
+      Math.random() * 256
+    )},${parseInt(Math.random() * 256)})`;
+  };
+  React.useEffect(() => {
+    for (let i = 0; i < 1001; i++) {
+      for (let j = 0; j < 1001; j++) {}
+    }
+    const {bottom} = ref1.current.getBoundingClientRect();
+    ref.current.style.backgroundColor = randomColor();
+    ref.current.style.top = (bottom + parseInt(Math.random()*400)) + "px"
+    // ref.current.style.color = "gray";
+  }, [color]);
+  return (
+    <div className="App">
+      <h1 ref={ref1}>React App</h1>
+      <h1 style={{ color, position: 'fixed' }} ref={ref}>Hello CodeSandbox</h1>
+      <button
+        onClick={(e) => {
+          setColor(randomColor());
+          console.log(color);
+        }}
+      >
+        Change
+      </button>
+    </div>
+  );
+}
+ReactDOM.render(<App />, document.querySelector('#react-container'))
+</script>
+</html>
