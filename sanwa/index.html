@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanwa Tools</title>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
+body{
+  background-color: #131316;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+section{
+  display: grid;
+  place-items: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.hidden{
+  opacity: 0;
+  filter:blur(5px);
+  transform: translateX(-100%);
+  transition: all 1s;
+}
+/* .hidden:nth-child(even){
+  transform: translateX(-100%);
+} */
+
+.show{
+  opacity: 1;
+  filter:blur(0px);
+  transform: translateX(0);
+}
+
+.logos{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.logo:nth-child(2){
+  transition-delay: 200ms;
+}
+.logo:nth-child(3){
+  transition-delay: 400ms;
+}
+.logo:nth-child(4){
+  transition-delay: 600ms;
+}
+
+.logo{
+  margin: 1rem;
+}
+/* img{
+  border-radius: 1rem;
+} */
+
+.maindiv{
+  height: 100vh;
+  width: 100%;
+  background-image: url('https://1d127zyshrewb.cdn.shift8web.com/wp-content/uploads/2018/01/Untitled-1.jpg');
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+h3{
+  font-size: 3rem;
+  font-weight: 500;
+}
+@media(prefers-reduced-motion){
+  .hidden{
+    transition: none;
+  }
+}
+
+.navbar{
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  padding-right: 2rem;
+  /* justify-content: center; */
+  background-color: rgb(19,19,22, 0.3);
+}
+.nav-img{
+  height: 3rem;
+}
+.nav-menu{
+  flex: 1;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.nav-item{
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.stay{
+  transform: translateX(0);
+}
+.nav-active{
+  border-bottom: 2px solid white;
+  color: rgb(255, 208, 208);
+}
+
+.small-menu{
+  display: none;
+}
+
+figure{
+  width: 200px;
+}
+@media screen and (max-width: 500px){
+  .show-if-space{
+    display: hidden;
+  }
+  .small-menu{
+    display: flex;
+  }
+  .big-menu{
+    display: none;
+  }
+}
+
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  color: white;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
+</style>
+<body>
+  <!-- <h1>Hi Mom!</h1> -->
+  <nav class="navbar">
+    <img class="nav-img" src="https://1d127zyshrewb.cdn.shift8web.com/wp-content/uploads/2020/06/sanwa-logo_1-e1592822664781.png"></img>
+    <div class="nav-menu big-menu">
+      <div class="nav-item hover-underline-animation"><a>Contact us &nbsp;</a></div>
+      <div class="nav-item hover-underline-animation"><a>Quality and RnD</a></div>
+      <div class="nav-item hover-underline-animation"><a>About us</a></div>
+      <div class="nav-item nav-active"><a>Home</a></div>
+    </div>
+    <div class="nav-menu small-menu">
+      <svg viewBox="0 0 100 80" width="40" height="40" style="margin-right:2rem; color:white">
+        <rect width="100" height="20" color="white"></rect>
+        <rect y="30" width="100" height="20"></rect>
+        <rect y="60" width="100" height="20"></rect>
+      </svg>
+      <div>&nbsp;</div>
+    </div>
+  </nav>
+
+  <section>
+
+    <!-- <h2 class="hidden">Sanwa Tools</h2> -->
+    <!-- <img src="https://1d127zyshrewb.cdn.shift8web.com/wp-content/uploads/2018/01/Untitled-1.jpg">
+    </img> -->
+    <div class="maindiv stay">
+      <h3 class="hidden">Diamond Saw Blade for Refactory Cutting</h3>
+      <p class="hidden show-if-space">
+        Established in the year 1942 as Sanwa tools Pvt. Ltd., The company aims at providing complete solutions in the field of Stone and Concrete cutting 
+        <br /> <br />
+      </p>
+    </div>
+  </section>
+  <section class="hidden">
+    <p>
+      International Quality at Indian prices
+    </p>
+    <img src="https://1d127zyshrewb.cdn.shift8web.com/wp-content/uploads/2018/02/stone-single-saw-blank-2x.png" style="height:60vh;"/>
+    <p>
+      Optimum Low cost cutting to ensure customer satisfaction
+    </p>
+    <hr style="width: 50%;"/>
+  </section>
+  <section class="hidden">
+    <h3>Our Products </h3>
+    <div class="logos hidden">
+    <div class="logo hidden">
+      <figure>
+        <img class="figimg" src="https://1d127zyshrewb.cdn.shift8web.com/wp-content/uploads/2020/06/stone-diamond-wire-saw-2x.png" style="width:200px; height:200px">
+        <figcaption>
+          <h4>Stone Industry</h4>
+          <p>We offer products to our patrons as per the need of the application.
+          Our Diamond Wire Saws are used in various places where diamond working is done.</p>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="logo hidden">
+      <figure>
+        <img class="figimg" src="https://1d127zyshrewb.cdn.shift8web.com/wp-content/uploads/2020/06/CCD-Diamond-core-bit.png" style="width:200px; height:200px">
+        <figcaption>
+          <h4>Concrete Controlled Demolition</h4>
+          <p>Blades we offer is widely demanded by the clients for their durability and reliability. Besides, we assure our clients that a quality approved array is delivered from our end.</p>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="logo hidden">
+      <figure>
+        <img class="figimg" src="https://1d127zyshrewb.cdn.shift8web.com/wp-content/uploads/2020/06/Industrial-Applications-Diamond-Blade-for-Precast-Concrete2x.png" style="width:200px; height:200px">
+        <figcaption>
+          <h4>Industrial Applications
+          </h4>
+          <p>Our clients can avail from us a quality tested array of Wall Saw Blades. The Wall Saw Blades we offer is widely demanded by the clients for their durability and reliability.</p>
+        </figcaption>
+      </figure>
+    </div>
+    </div>
+    <hr style="width: 50%;"/>
+  </section>
+  <section class="hidden">
+    <h3>About us</h3>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+      <div style="max-width: min(100%, 300px)">
+        <img src="https://ik.imagekit.io/amey/100-sat_9msWEh1pL.png?ik-sdk-version=javascript-1.4.3&updatedAt=1665948779975" style="width: 100%;"/>
+      </div>
+      <div style="max-width: 600px" style="flex : 1">
+        <p>
+          Sanwa is one of the pioneer manufacturers of Diamond Tools in India, with experience of more than two decades. Established in the year 1994, the company's efforts have been directed towards providing “Total Solutions” in the field of Stone and Concrete cutting.
+        </p>
+        <p>
+          Sanwa's growth as a National Organisation has been based on the solid foundation of its research and technical expertise, commitment to its customers in the quality and deliveries and unmatched response to customer's needs.
+        </p>
+      </div>
+    </div>
+  </section>
+</body>
+<script defer>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(element => {
+    console.log(element);
+    if(element.isIntersecting){
+      element.target.classList.add('show'); 
+    } else {
+      element.target.classList.remove('show');
+    }
+  });
+})
+const hiddenElements = document.querySelectorAll('.hidden');
+hiddenElements.forEach(e => observer.observe(e)); 
+</script>
+</html>

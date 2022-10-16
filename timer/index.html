@@ -1,0 +1,96 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typeracer gen2</title>
+  </head>
+  <style>
+  body{ 
+    margin: 0rem; 
+    font-family: 'Courier New', monospace; 
+    height: 100%;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    /* background: rgba(249,241,229,255) */
+    /* background: rgba(255, 166, 0, 0.04); */
+    /* background: rgba(255, 166, 0, 0.04); */
+  }
+
+
+
+  </style>
+
+  <body>
+    <div id="react-container"></div>
+  </body>
+
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+
+  <script type="text/babel">
+  // import React, { useEffect, useState } from "react";
+  "use strict";
+  var isStrict = (function() { return !this; })();
+
+  console.log("isstrict", isStrict);
+
+  function App(){
+
+    const [num, setNum] = React.useState(10);
+    const [lock, setLock] = React.useState(false);
+
+
+    const ref = React.useRef();
+
+    const func = React.useCallback(() => {
+      ref.current = setInterval(() => {
+        setNum(num => num - 1);
+        if(num === 0){
+          console.log("clearing interval");
+        }
+      }, 200);
+    }, [num, ref]);
+
+    React.useEffect(() => {
+      if(num === 0){
+        clearInterval(ref.current);
+      }
+    }, [num]);
+
+    // const func = () => {
+    //   ref.current = setInterval(() => {
+    //     setNum(num => num - 1);
+    //     console.log("Interval", num, refnum.current, ref.current);
+    //     if(num === 0 && refnum.current === 0){
+    //       refnum.current = refnum.current - 1;
+    //       console.log("clearing interval");
+    //       // ref.current.clearInterval();
+    //       clearInterval(ref.current);
+    //     }
+    //   }, 200);
+    // }
+
+    // const func = React.useCallback(() => {
+    //   setTimeout(() => {
+    //     if(num > 0 ){
+    //       console.log("Ran!");
+    //       setNum(num => Math.max(num - 1, 0));
+    //       func();
+    //     }
+    //   }, 200)
+    // }, []);
+
+    return(<>
+      {/* <button style={{ marginTop: '3rem'}} onClick={runF}> {num}</button> */}
+      <button style={{ marginTop: '3rem'}} onClick={func}> {num}</button>
+      <button onClick={() => setNum(10)}>RESET</button>
+      {num === 0 && <p>Countdown completed</p>}
+    </>)
+  }
+  ReactDOM.render(<App />, document.querySelector('#react-container'))
+  </script>
+  </html>
