@@ -213,7 +213,7 @@ td{
       I am too sane to add any pic of myself here.
     </p>
   </section>
-  <section class="hidden" style="background-color: #0c0c0e">
+  <section class="hidden" style="background-color: #0c0c0e" id="linkSection">
     <h3>Our Experiences </h3>
     <div class="logos hidden">
     <div class="logo hidden">
@@ -222,7 +222,7 @@ td{
         <figcaption>
           <h4>The day Along yelled like a maniac</h4>
           <!-- <textarea /> -->
-          <input />
+          <input id="img1" class="qinp"/>
         </figcaption>
       </figure>
     </div>
@@ -231,7 +231,7 @@ td{
         <img class="figimg" src="https://lh3.google.com/u/0/d/18lA6x1cWo7qSCsMqZPleWsnlJ8BLUhe_=w2560-h943-iv1" style="width:200px;">
         <figcaption>
           <h4>The day the maniac forgot her eyebrows</h4>
-          <input />
+          <input class="qinp"/>
         </figcaption>
       </figure>
     </div>
@@ -240,7 +240,7 @@ td{
         <img class="figimg" src="https://lh3.googleusercontent.com/fife/AK0iWDw6dSZFfL0aSLf2uNju99ckiKTVRQmvMAXpStw4i1Zqqt0bK7FKCYqaQ6KuhiB_sVf1VLLjNasTDCI8pw48IOcRW9mKRlPla8A6HYy63B_cUYHWZnpRieWyMn0ned3SfUOla53lF2rSJagyhGHGGFg5IU4psCXOnoWZpXjhnRLFc1F76YX02x7J53rYnuqCBS8GOqlQqgdGpYRyY_sNmZ5zekRyqI3HhfimkGc61sDUQ4U20HNDGJWd5VGBCnQ118EjYh2YqbDFPUJwRZ-r0z9wf7jPkX4fG3iN6ax4JlayyF40h3pAbkZgGW0RsxePxYMGs_tW79NnSshu37KEwfLDtm0Or38w3ES9ssG4Pxtupy1l3qaUrcDNDiVr8PGiTTGN0QSb2wilHcFkUcekzvrjTka8VApA7Aipn9sjd3tnkTidpyVyJ5qcRbIeYSwak9V0SPOe8QcbsSRM4aFuNqaS_YeQl7L82bF3sHVs_J_IDeHBb3KAzXfFs3A4fTlCL_ieaeiRKO2OaYOofTyL380MJ1dMJ6F0dESgV8Ln1GN6dUhAmVa1itWRrfkrshD2gxm8KHsDrJjAepWIgCF9USaVyQmlrE3IjazXbDeRt5YX9ZtYwTXi6AaQ6muk3EYpZKnAz3Xq_wX8TqJwn0bAcP2LTXQmTWA9nbbZ7qbEhg0ACggbVlfjhTH271aq4yfxfgB4YL6ci-GLvZYx1tVdGc_JfCQs8u-07oXme1AmWAPcxPJoCLwo8_Bpx8PIKdWY3kkkYUNMYSPp9Tzeks38AwmHAkeZ1YtPfmRG54hHvEglBJ21u3kbFkUMD2a4zzJTDyB92wKHP5Wq9LXMkLONPNrsgXRuioSzBqErnsDQaONF-QlKAfdtxYHxFPSrp9o7dxM8bEr0766Ttc7XEYbIhr03YHTLixy7Oz6Kcrx1oSkUYbBOSUczticd8RjhF5mnt6AunyoHrP_OD7VUyn3M6VOnz7JSV8v8ZZDYq0mg2OmsfwbtHfZRbg36FuMEw0ml9NzLuJxIZa_2RaQXIS6skP-GoNnmYA-n2wnphitZupXRmKDXP9i7hc-Y5-XWLA0NzdE6Lurk2uAhILW2egGHbsQu8FbLZW415BwzHLSks1XrKak0mtAANKweqQM_NHotBbbf9fKb2hw57oPs8Qmr_YnDL4plqNq9nYr2XFyB-oCPu12XTyQiQvLvBzG35Cv3AUkNudVVRh_ZyOaUxrmqivF2Y7_r8RcXHteXJg-UeuBKTfFNbcWxciujlImCSuLci_cBvlk7EAtMobPwEzv0Xf-M7xXzp3SRjCP3g6MGKt3kiG9xDqnQP02KRbdNbybMWVjfVS1iSWzE-haqVXlM-qRhGRxQsqmRK3RJUg6fdfksYg-t79O_ZDC7nbqgfbZTYk0f1KqVvcmdIntw58tlai_DPhmGZRHKfr4IM7t5yusJxbTeQNlPn1W31onnsLMXkT3TSUhLNNi2Cx0S9_xjrtIZGyvtOHkpTu_QPP_CA4H_EFCCKB4HjKk7UhFwqRQ7hQyiAM97zXLRtOhwY4YfAt6vSHTfVKOLrygtePdbfX1uwAavH26D9IbDuaAT7jTA4lAFZI9MxjNRtyw_lpOwhm0=w2560-h1393" style="width:200px;">
         <figcaption>
           <h4>Few minutes before she jumped</h4>
-          <input />
+          <input class="qinp"/>
         </figcaption>
       </figure>
     </div>
@@ -293,7 +293,7 @@ td{
 <script defer>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(element => {
-    console.log(element);
+    // console.log(element);
     if(element.isIntersecting){
       element.target.classList.add('show'); 
     } else {
@@ -302,6 +302,21 @@ const observer = new IntersectionObserver((entries) => {
   });
 })
 const hiddenElements = document.querySelectorAll('.hidden');
-hiddenElements.forEach(e => observer.observe(e)); 
+hiddenElements.forEach(e => observer.observe(e));
+
+document.querySelectorAll('.qinp').forEach(el => el.addEventListener('keyup', e => {
+  setTimeout(() => {
+    if(e.target.value === 'bitchy'){
+      document.querySelector('#linkSection').innerHTML = `
+        <h3>Enjoy :)</h3>
+        <ul>
+          <li><a href="https://drive.google.com/drive/folders/1FoB0CqvzhKzqE5IlGI8B7ixEyM_fd9oQ?usp=sharing">The idol</a></li>
+          <li><a href="https://www.seedr.cc/download/archive/58986e06520e4f691fcc80fa7eb5b45ee5fa9e636f2e75298f4e0f571a27686d?token=ee3492cd9d68ff61d139c5886acf2e14d84c81291b5802426266d214532ef708&exp=1699728232">Daisy Jones and six</a></li>
+        </ul>
+      `
+    }
+  }, 100);
+}));
+
 </script>
 </html>
