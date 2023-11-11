@@ -169,6 +169,41 @@ td{
   display: flex;
 }
 
+.cell{
+      height: 100px;
+      width: 100px;
+      background-color: gray;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: Verdana, sans-serif;
+    }
+    .cell:hover{
+      background-color: #333;
+    }
+    .cell:active{
+      background-color: #000;
+    }
+
+#reset-tic-tac-toe{
+  background-color: gray;
+  cursor: pointer;
+  color: white;
+  font-family: Verdana, sans-serif;
+  border: 0px;
+  padding: 5px 15px;
+}
+
+#reset-tic-tac-toe:hover{
+  background-color: #333;
+}
+#reset-tic-tac-toe:active{
+  background-color: #000;
+}
+
+
 
 </style>
 <body>
@@ -247,23 +282,19 @@ td{
     </div>
     <!-- <hr style="width: 50%;"/> -->
   </section>
-  <!-- <section class="hidden">
-    <h3>About us</h3>
-    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
-      <div style="max-width: min(100%, 300px)">
-        <img src="https://ik.imagekit.io/amey/100-sat_9msWEh1pL.png?ik-sdk-version=javascript-1.4.3&updatedAt=1665948779975" style="width: 100%;"/>
-      </div>
-      <div style="max-width: 600px" style="flex : 1">
-        <p>
-          Sanwa is one of the pioneer manufacturers of Diamond Tools in India, with experience of more than two decades. Established in the year 1994, the company's efforts have been directed towards providing “Total Solutions” in the field of Stone and Concrete cutting.
-        </p>
-        <p>
-          Sanwa's growth as a National Organisation has been based on the solid foundation of its research and technical expertise, commitment to its customers in the quality and deliveries and unmatched response to customer's needs.
-        </p>
+  <section class="hidden">
+    <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+      <h1>Beat me in tic tac toe to win first part of amazon gift voucher! :D</h1>
+      <p>You go first :)</p>
+      <div id="board" style="display: grid; grid-template-columns: auto auto auto; grid-gap: 5px">
+        <div class="cell" id="c1"></div> <div class="cell" id="c2"></div> <div class="cell" id="c3"></div>
+        <div class="cell" id="c4"></div> <div class="cell" id="c5"></div> <div class="cell" id="c6"></div>
+        <div class="cell" id="c7"></div> <div class="cell" id="c8"></div> <div class="cell" id="c9"></div>
       </div>
     </div>
+    <button id="reset-tic-tac-toe">RESET</button>
   </section>
-  <section class="hidden stay" style="background:black; height: fit-content">
+  <!-- <section class="hidden stay" style="background:black; height: fit-content">
     <h3>Contact info</h3>
     <table>
       <tr>
@@ -317,6 +348,93 @@ document.querySelectorAll('.qinp').forEach(el => el.addEventListener('keyup', e 
     }
   }, 100);
 }));
+
+const WIN = [[1,2,3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
+  const moves = [];
+  let loading = false;
+  const getSplitValues = () => {
+    const a = [], b = [];
+    moves.forEach((i, index) => {
+      if(index % 2 === 1) a.push(i); else b.push(i);
+    });
+    a.sort(); b.sort();
+    return [a, b];
+  }
+  const whoWon = () => {
+    let won = 0;
+    const [a, b] = getSplitValues();
+    WIN.forEach(arr => {
+      if(!won){
+        if(a.includes(arr[0]) && a.includes(arr[1]) && a.includes(arr[2])) won = 1;
+        if(b.includes(arr[0]) && b.includes(arr[1]) && b.includes(arr[2])) won = 2;
+      }
+    });
+    return won;
+  }
+
+  const playNextMove = () => {
+    loading = true;
+    const [a,b] = getSplitValues();
+    let nextMove = 0;
+    if(b.length === 1){
+      if(moves[0] === 5) nextMove = 1; else nextMove = 5;
+    } else {
+      for(let i=1;i<=9;i++) { if(!moves.includes(i)) {
+        moves.push(i);
+        if(whoWon() === 2) nextMove = i;
+        moves.pop();
+      }}
+      for(let i=1;i<=9;i++) { if(!nextMove && !moves.includes(i)) {
+        moves.push(i);
+        let lost = false;
+        for(let j=1; j<=9; j++){ if(!nextMove && !moves.includes(j)) {
+          moves.push(j);
+          if(whoWon() === 2){lost = true;}
+          moves.pop();
+        }}
+        moves.pop();
+        if(!lost) nextMove = i;
+      }}
+    }
+    if(!nextMove){
+      for(let i=1;i<10;i++) if(!moves.includes(i)) { nextMove = i; }
+    }
+    document.querySelector(`#c${nextMove}`).innerHTML = 'AMEY';
+    moves.push(nextMove);
+    loading = false;
+}
+
+  document.querySelectorAll('.cell').forEach(i => i.addEventListener('click', e => {
+    const id = parseInt(e.target.id.split('c')[1]);
+    if(!loading && !moves.includes(id)){
+      moves.push(id);
+      document.querySelector(`#c${id}`).innerHTML = 'POTTY';
+      if(whoWon() === 2){
+        setTimeout(() => { alert('Congrats! You won, part 1 of code is SV7X'); }, 100);
+      } else if(moves.length === 9){
+        setTimeout(() => { alert('Draw, try again'); }, 100);
+        loading = true;
+      } else {
+        playNextMove();
+        if(whoWon() === 2){
+          setTimeout(() => { alert('Congrats! You won, part 1 of code is SV7X'); }, 100);
+          loading = true;
+        } else if(whoWon() === 1){
+          setTimeout(() => { alert('Amey Sir won! Start Dancing!!!!'); }, 100);
+          loading = true;
+        } else if(moves.length === 9){
+          setTimeout(() => { alert('Draw, try again'); }, 100);
+          loading = true;
+        }
+      }
+    }
+  }));
+
+  document.querySelector('#reset-tic-tac-toe').addEventListener('click', () => {
+    while(moves.length) moves.pop();
+    loading = false;
+    document.querySelectorAll('.cell').forEach(i => i.innerHTML = '');
+  })
 
 </script>
 </html>

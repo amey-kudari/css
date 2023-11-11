@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe - Unbeatable AI</title>
+  <style>
+    .cell{
+      height: 100px;
+      width: 100px;
+      background-color: gray;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: Verdana, sans-serif;
+    }
+    .cell:hover{
+      background-color: #333;
+    }
+    .cell:active{
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+
+<div style="display: flex; align-items: center;">
+  <div id="board" style="display: grid; grid-template-columns: auto auto auto; grid-gap: 5px">
+    <div class="cell" id="c1"></div> <div class="cell" id="c2"></div> <div class="cell" id="c3"></div>
+    <div class="cell" id="c4"></div> <div class="cell" id="c5"></div> <div class="cell" id="c6"></div>
+    <div class="cell" id="c7"></div> <div class="cell" id="c8"></div> <div class="cell" id="c9"></div>
+  </div>
+</div>
+
+<script>
+  const WIN = [[1,2,3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
+  const moves = [];
+  let loading = false;
+  const getSplitValues = () => {
+    const a = [], b = [];
+    moves.forEach((i, index) => {
+      if(index % 2 === 1) a.push(i); else b.push(i);
+    });
+    a.sort(); b.sort();
+    return [a, b];
+  }
+  const whoWon = () => {
+    let won = 0;
+    const [a, b] = getSplitValues();
+    WIN.forEach(arr => {
+      if(!won){
+        if(a.includes(arr[0]) && a.includes(arr[1]) && a.includes(arr[2])) won = 1;
+        if(b.includes(arr[0]) && b.includes(arr[1]) && b.includes(arr[2])) won = 2;
+      }
+    });
+    return won;
+  }
+
+  const playNextMove = () => {
+  loading = true;
+    const [a,b] = getSplitValues();
+    let nextMove = 0;
+    if(b.length === 1){
+      if(moves[0] === 5) nextMove = 1; else nextMove = 5;
+    } else {
+      for(let i=1;i<=9;i++) { if(!moves.includes(i)) {
+        moves.push(i);
+        if(whoWon() === 2) nextMove = i;
+        moves.pop();
+      }}
+      for(let i=1;i<=9;i++) { if(!nextMove && !moves.includes(i)) {
+        moves.push(i);
+        let lost = false;
+        for(let j=1; j<=9; j++){ if(!nextMove && !moves.includes(j)) {
+          moves.push(j);
+          if(whoWon() === 2){lost = true;}
+          moves.pop();
+        }}
+        moves.pop();
+        if(!lost) nextMove = i;
+      }}
+    }
+    if(nextMove){
+      document.querySelector(`#c${nextMove}`).innerHTML = 'AMEY';
+      moves.push(nextMove);
+      loading = false;
+    } else {
+      alert('It is a draw!!');
+    }
+}
+
+  document.querySelectorAll('.cell').forEach(i => i.addEventListener('click', e => {
+    const id = parseInt(e.target.id.split('c')[1]);
+    if(!loading && !moves.includes(id)){
+      moves.push(id);
+      document.querySelector(`#c${id}`).innerHTML = 'POTTY';
+      if(whoWon() === 2){
+        setTimeout(() => { alert('Congrats! You won, part 1 of code is QSDF'); }, 100);
+      } else {
+        playNextMove();
+        if(whoWon() === 2){
+          setTimeout(() => { alert('Congrats! You won, part 1 of code is QSDF'); }, 100);
+          loading = true;
+        } else if(whoWon() === 1){
+          setTimeout(() => { alert('Amey Sir won! Start Dancing!!!!'); }, 100);
+          loading = true;
+        }
+      }
+    }
+  }));
+</script>
+
+</body>
+</html>
